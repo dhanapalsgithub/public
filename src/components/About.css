@@ -1,0 +1,130 @@
+/* General Section Setup (Keeping your Parallax/Base) */
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+}
+
+.parallax {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+/* --- About Section Container --- */
+.about-section {
+  /* Use a background image for the main section's parallax effect */
+  background-image: url('https://images.pexels.com/photos/9296391/pexels-photo-9296391.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px 0; /* Add vertical padding for mobile safety */
+}
+
+/* --- Overlay & Content Wrapper --- */
+.about-overlay {
+  /* This acts as the main card containing the two columns */
+  background-color: rgba(255, 255, 255, 0.95); /* Slightly less transparency */
+  padding: 50px; /* Increased padding */
+  border-radius: 12px;
+  max-width: 1100px; /* Increased max-width for the two-column layout */
+  width: 90%;
+  margin: 20px auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer, more elegant shadow */
+}
+
+/* --- FLEXBOX LAYOUT (Left Content, Right Image) --- */
+.about-container {
+  display: flex;
+  gap: 40px; /* Space between content and image */
+  align-items: center;
+}
+
+/* --- Content Column (Left) --- */
+.about-content {
+  flex: 1; /* Takes up equal space initially */
+  padding-right: 20px; /* Spacing from the internal image */
+}
+
+.content-title {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  color: #004a99; /* Primary Blue */
+  font-weight: 700;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* --- Image Column (Right) --- */
+.about-image-wrapper {
+  flex: 1; /* Takes up equal space initially */
+  overflow: hidden;
+  border-radius: 8px; /* Match the overlay style */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  min-width: 300px; /* Ensure image wrapper has a minimum size */
+}
+
+.about-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease-in-out;
+}
+
+.about-image:hover {
+  transform: scale(1.05); /* Subtle zoom effect on hover */
+}
+
+/* --- Button Styling --- */
+.read-more-btn {
+  background-color: #004a99;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 10px;
+}
+
+.read-more-btn:hover {
+  background-color: #003773;
+  transform: translateY(-1px);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 950px) {
+  .about-container {
+    flex-direction: column; /* Stacks columns vertically */
+    gap: 30px;
+  }
+
+  .about-content {
+    padding-right: 0;
+  }
+
+  .about-image-wrapper {
+    min-width: unset;
+    width: 100%; /* Image takes full width when stacked */
+  }
+
+  .content-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,108 @@
+/* MAIN SECTION */
+.section {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  margin-top: 5px;
+}
+
+/* PARALLAX */
+.parallax {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+/* CONTACT CONTAINER */
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  padding: 10px;
+  background-color: #c5c8cd;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+
+  /* 🔥 Fix overflow causing right side gap */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* LEFT + RIGHT BOXES */
+.contact-left,
+.contact-right {
+  flex: 1;
+  min-width: 0;             /* 🔥 Important: removes overflow on small screens */
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* FORM */
+.contact-right form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.contact-right input,
+.contact-right textarea {
+  margin-bottom: 17px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+
+  /* 🔥 Prevent mobile screen overflow */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-right button {
+  padding: 12px;
+  background-color: #1b3864;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-right button:hover {
+  background-color: #ca6730;
+}
+
+/* RESPONSIVE FIX */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+
+    /* 🔥 100% safe layout on mobile */
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+
+  .contact-left iframe {
+    width: 100%;   /* 🔥 Prevents right overflow */
+    height: 150px;
+  }
+}

@@ -1,0 +1,95 @@
+.service-wrapper {
+  padding: 60px 40px;
+  background-color: #f5f7fb;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.service-main-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1b1b1b;
+  margin-top: 10px;
+}
+
+.underline {
+  width: 80px;
+  height: 4px;
+  background: #ca6730;   /* green underline same as screenshot */
+  margin: 0 auto 40px auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  padding: 20px;
+}
+
+.service-card {
+  text-align: left;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.service-icon {
+  font-size: 28px;
+  color: #1b3864; /* navy blue icon */
+  margin-bottom: 10px;
+}
+
+.service-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1b1b1b;
+  margin-bottom: 8px;
+}
+
+.service-card p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
+}
+/* Dropdown styling */
+.dropdown-box {
+  margin-top: 10px;
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 8px 12px;
+  margin: 5px 0;
+  background: #1b3864;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #ca6730;
+}
+
+.service-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.service-wrapper {
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 80px 20px;
+}
+
+
