@@ -6,7 +6,7 @@
   justify-content: center;
   color: white;
   font-size: 2rem;
-  margin-top: 5px;
+  
 }
 
 /* PARALLAX */
@@ -21,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  gap: 20px;
+  gap: 10px;
   padding: 10px;
   background-color: #c5c8cd;
   width: 100%;

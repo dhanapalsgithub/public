@@ -2,10 +2,9 @@
   "name": "rebar",
   "version": "0.1.0",
   "private": true,
- "engines": {
-  "node": "22.x"
-},
-
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -23,6 +22,8 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.9.6",
     "react-scripts": "^5.0.1",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.19",
     "web-vitals": "^2.1.4",
     "webpack": "^5.103.0",
@@ -35,7 +36,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [

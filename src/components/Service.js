@@ -3,7 +3,6 @@ import "./Service.css";
 import {
   FaTools,
   FaDraftingCompass,
-  FaClipboardList,
   FaFileAlt,
   FaCalculator,
   FaProjectDiagram,

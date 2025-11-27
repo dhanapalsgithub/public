@@ -1,10 +1,18 @@
-import React from 'react';
-import LandingPage from './components/LandingPage';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import Services from "./components/Service"; // Make sure this exists
+import Service from "./components/Service";
 
 function App() {
-  return <LandingPage />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/services" element={<Service />} />
+      </Routes>
+    </Router>
+  );
 }
 
-
 export default App;
-
