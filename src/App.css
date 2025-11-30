@@ -9,9 +9,9 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #f5f7fb;
   font-size: 2rem;
-  margin-bottom: 100px;
+  
 }
 
 .parallax {

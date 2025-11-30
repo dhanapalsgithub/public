@@ -27,6 +27,7 @@
   justify-content: center;
   position: relative;
   padding: 20px 0; /* Add vertical padding for mobile safety */
+  margin-top:0px;
 }
 
 /* --- Overlay & Content Wrapper --- */

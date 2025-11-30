@@ -1,11 +1,15 @@
 import React from 'react';
 import './About.css';
+import NavBar from './NavBar';
+import Footer from './Footer';
 
 const About = () => {
   // Use a placeholder image for the right column
   const placeholderImage = 'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
   return (
+    <>
+    <NavBar />
     <div id="about" className="about-section">
       <div className="about-overlay">
         <div className="about-container">
@@ -36,6 +40,8 @@ Our team of experienced engineering professionals delivers accurate and reliable
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

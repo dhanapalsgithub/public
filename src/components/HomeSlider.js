@@ -11,6 +11,8 @@ import slider1 from "../assets/slider1.png";
 import slider2 from "../assets/slider2.png";
 import slider3 from "../assets/slider3.png";
 import slider5 from "../assets/slider5.png";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const HomeSlider = () => {
   const navigate = useNavigate(); // Hook for navigation
@@ -31,10 +33,13 @@ const HomeSlider = () => {
 
   // Click handler for "Explore Services" button
   const handleExploreServices = () => {
-    navigate("/services"); // Navigate to services page
+    navigate("/Service"); // Navigate to services page
   };
 
   return (
+    <>
+    <NavBar />
+   
     <div className="home-container">
       {/* Slider */}
       <Slider {...settings}>
@@ -64,6 +69,8 @@ const HomeSlider = () => {
         <CounterBox end={18} duration={2000} label="Years Experience" />
       </div>
     </div>
+    <Footer />
+     </>
   );
 };
 

@@ -7,11 +7,16 @@ import {
   FaCalculator,
   FaProjectDiagram,
 } from "react-icons/fa";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const Service = () => {
   const [openDetailing, setOpenDetailing] = useState(false);
 
   return (
+    <>
+    <NavBar />
+   
     <div className="service-wrapper" id="service">
       <h2 className="service-main-title">Services</h2>
       <div className="underline"></div>
@@ -72,6 +77,8 @@ const Service = () => {
         </div>
       </div>
     </div>
+    <Footer />
+     </>
   );
 };
 

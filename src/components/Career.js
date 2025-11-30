@@ -1,71 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Career.css";
-import JobApplicationForm from "../components/JobApplicationForm";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
+import careerImage from "../assets/career.png";
 
 const Career = () => {
-  const [showJobs, setShowJobs] = useState(false);
-  const [openForm, setOpenForm] = useState(null); // which job form is open
-
-  const toggleForm = (id) => {
-    setOpenForm(openForm === id ? null : id); // open/close toggle
-  };
+  const navigate = useNavigate();
 
   return (
-    <div
-      id="career"
-      className="career-wrapper"
-      style={{ backgroundImage: "url('/mnt/data/career.png')" }}
-    >
-      <div className="career-content">
+    <>
+      <NavBar />
 
-        <h2 className="career-title">Careers</h2>
-        <div className="underline"></div>
+      <div className="career-hero">
+        <div className="career-hero-left">
+          <img src={careerImage} alt="career" className="career-hero-img" />
+        </div>
 
-        <div className="career-box">
-          <p>
-            R & I ENGINEERING AND TECHNOLOGY is looking for talented professionals who are
-            passionate about structural engineering.
+        <div className="career-hero-right">
+          <h2 className="career-title">Careers</h2>
+          <p className="career-desc">
+            R & I ENGINEERING AND TECHNOLOGY is looking for talented professionals
+            who are passionate about structural engineering.
           </p>
-
-          <p>
+          <p className="career-desc">
             We also offer internship opportunities. Send resumes with
             <strong> "Intern Application"</strong> in the subject line.
           </p>
 
-          <button className="career-btn" onClick={() => setShowJobs(prev => !prev)}>
+          <button className="career-btn" onClick={() => navigate("/careers/apply")}>
             JOIN OUR TEAM
           </button>
-        </div>
 
-        {/* ---------- JOB LIST SECTION ---------- */}
-        {showJobs && (
-          <div className="jobs-section">
-            <h3 className="job-location">Location : Chennai</h3>
+          {/* Rules & Regulations Section */}
+          <div className="career-rules">
+            <h3>Rules & Regulations to Apply</h3>
+            <ul>
+              <li>✔ Applicants must have a valid passport.</li>
+              <li>✔ Willingness to relocate anywhere if required.</li>
+              <li>✔ Commitment to company policies and ethical standards.</li>
+              <li>✔ Provide accurate and verifiable information in the application.</li>
+            </ul>
 
-            {/* ----------- Job 1 ----------- */}
-            <div className="job-card" onClick={() => toggleForm(1)}>
-              <span>Senior Rebar Detailer / CAD Technician</span>
-              <span className="plus-icon">{openForm === 1 ? "−" : "+"}</span>
-            </div>
 
-            {openForm === 1 && (
-              <JobApplicationForm jobTitle="Senior Rebar Detailer / CAD Technician" />
-            )}
 
-            {/* ----------- Job 2 ----------- */}
-            <div className="job-card" onClick={() => toggleForm(2)}>
-              <span>Junior Rebar Detailer / CAD Technician</span>
-              <span className="plus-icon">{openForm === 2 ? "−" : "+"}</span>
-            </div>
-
-            {openForm === 2 && (
-              <JobApplicationForm jobTitle="Junior Rebar Detailer / CAD Technician" />
-            )}
 
           </div>
-        )}
+        </div>
       </div>
-    </div>
+
+      <Footer />
+    </>
   );
 };
 

@@ -1,16 +1,22 @@
-import React from 'react'
-import'./Drawing.css'
+import React from "react";
+import "./Drawing.css";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const Drawing = () => {
   return (
+    <>
+    <NavBar />
+   
     <div
       id="drawing"
-      className="section parallax"
-      style={{ backgroundImage: "url('')" }}
+      className="drawing-section"
     >
-      <h1 style={{color:'black'}}>Welcome to R & I Engineering And Technology</h1>
+      <h1>Welcome to R & I Engineering And Technology</h1>
     </div>
-  )
-}
+    <Footer />
+     </>
+  );
+};
 
-export default Drawing
+export default Drawing;
