@@ -48,6 +48,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/drawing" element={<Drawing />} />
         <Route path="/admin" element={<AdminPanel />} />
+        
 
       </Routes>
 
