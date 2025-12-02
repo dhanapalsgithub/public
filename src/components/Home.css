@@ -53,7 +53,7 @@
 }
 
 .home-btn {
-  background: #f17b07;
+  background: #ca6730;
   border: none;
   padding: 12px 28px;
   border-radius: 6px;
@@ -71,16 +71,19 @@
 /* Counter overlay - Glassmorphism style */
 .counter-overlay {
   position: absolute;
-  bottom: 20px;
+  bottom: 250px;
   width: 95%;
-  max-width: 1200px;
-  display: flex;
+  max-width: 120px;
+  display: grid;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-  padding: 10px 250px;
-  margin-left: 210px;
+  padding: 10px 25px;
+  margin-left: 0px;
   z-index: 20;
+  
+  
+  
 
 
 
@@ -90,9 +93,11 @@
 
 /* Counter box */
 .counter-box {
-  text-align: center;
-  min-width: 150px;
+  text-align: left;
+  min-width: 50px;
   
+
+
 
 
 
@@ -101,15 +106,20 @@
 
 
 .counter-number {
-  font-size: 32px;
+  font-size: 18px;
   font-weight: 800;
-  color: greenyellow;
+  color:#ca6730;
+  
+  
+  
 }
 
 .counter-label {
   font-size: 18px;
-  color: #a4a5a3;
-  margin-top: 4px;
+  color: #272845;
+  font-size: bolder;
+  
+  
 }
 
 /* ---------- MOBILE RESPONSIVE ---------- */
@@ -164,4 +174,81 @@
 .slick-dots li button:before {
   color: white !important;
   font-size: 12px;
+}
+
+/* Services Container */
+.home-services-container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+  margin-top: 80px;
+}
+
+.home-services-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 35px;
+  font-weight: 700;
+  color: #0d2149;
+}
+
+/* Grid Layout */
+.home-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+
+}
+
+/* Card */
+.home-service-card {
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+}
+
+.home-service-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Card image */
+.home-service-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Title */
+.home-service-card h3 {
+  font-size: 20px;
+  margin-top: 15px;
+  color: #0a1b3c;
+  font-weight: 700;
+}
+
+/* Description */
+.home-service-card p {
+  font-size: 15px;
+  padding: 10px 15px 20px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .home-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .home-services-grid {
+    grid-template-columns: 1fr;
+  }
 }

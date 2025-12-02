@@ -1,0 +1,112 @@
+.sp-container {
+  padding: 40px 80px;
+  background: #f7f7f7;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.sp-hero {
+  position: relative;
+  border-radius: 16px;
+  min-height:480px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+
+.sp-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 36, 64, 0.65);
+}
+
+.sp-hero-content {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  padding: 24px;
+}
+
+.sp-hero h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.sp-hero p {
+  font-size: 16px;
+  opacity: 0.95;
+}
+
+.sp-section {
+  background: #fff;
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.sp-section h2 {
+  font-size: 24px;
+  color: #272845;
+  margin-bottom: 12px;
+}
+
+.sp-section p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.sp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.sp-grid ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sp-grid li {
+  background: #f3f6fb;
+  border: 1px solid #e1e6f0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: #2a2f45;
+}
+
+/* Hero backgrounds */
+.sp-hero--bim {
+  background: url("https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg") center/cover no-repeat;
+}
+.sp-hero--architectural {
+  background: url("https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg") center/cover no-repeat;
+}
+.sp-hero--mechanical {
+  background: url("https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg") center/cover no-repeat;
+}
+.sp-hero--precast {
+  background: url("https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg") center/cover no-repeat;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .sp-container {
+    padding: 30px 40px;
+  }
+  .sp-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .sp-container {
+    padding: 20px 24px;
+  }
+  .sp-hero {
+    min-height: 200px;
+  }
+}

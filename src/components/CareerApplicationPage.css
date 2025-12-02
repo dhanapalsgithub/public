@@ -1,258 +1,59 @@
-/* ================================
-   CAREER APPLICATION PAGE STYLES
-==================================*/
+/* application.css */
 
-/* Background image for job section */
-.job-section {
-  padding: 60px 9%;
-  background: url('../assets/career.png') no-repeat center center fixed;
-  background-size: cover;
-  position: relative;
-  border-radius: 12px;
-  
-}
-
-/* Overlay for readability */
-.job-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,0.85); /* light overlay */
-  border-radius: 12px;
-  z-index: 0;
-}
-
-.job-section > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Title */
-.job-location-title {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 25px;
-  color: #242845;
-}
-
-/* Layout */
-.job-flex {
-  display: flex;
-  gap: 45px;
-}
-
-.job-left {
-  flex: 1;
-}
-
-.job-right {
-  flex: 1.6;
-  background: #f7f8fa;
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid #e1e1e1;
-  
-}
-
-/* Job card */
-.job-card {
-  background: #242845;
-  padding: 18px 25px;
-  color: white;
-  border-radius: 8px;
-  font-size: 17px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.job-card:hover {
-  background: #1c2038;
-}
-
-.plus-icon {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.select-text {
-  font-size: 17px;
-  color: #666;
-  text-align: center;
-}
-
-.no-jobs-text {
-  font-size: 18px;
-  color: #b00020;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* Dropdown */
-.location-dropdown {
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-/* Success popup */
-.success-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(36, 40, 69, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.success-box {
-  background: #ffffff;
+/* JOB APPLICATION FORM */
+.job-form-container {
+  background: #fff;
   padding: 40px 45px;
   border-radius: 14px;
-  text-align: center;
-  max-width: 470px;
-  width: 90%;
-  box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.15);
-  animation: popIn 0.35s ease-out;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  margin: 30px auto;
+  max-width: 900px;
+
+  /* Correct path usage */
+  background-image: url('../assets/career.png');
+  background-size: cover;       /* image fills container */
+  background-position: center;  /* center alignment */
+  background-repeat: no-repeat; /* avoid tiling */
 }
 
-.success-box h3 {
-  color: #004a99;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 12px;
+.job-form-container h2 {
+  font-size:26px;
+  font-weight:700;
+  margin-bottom:25px;
+  color:#242845;
+  text-align:center;
+}
+.job-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px 22px; }
+.full { grid-column:span 2; }
+
+.job-form-container input,
+.job-form-container select,
+.job-form-container textarea {
+  width:100%; padding:14px 16px; border:1px solid #ddd; border-radius:8px;
+  background:#fafafa; font-size:15px; transition:0.25s;
+}
+.job-form-container input:focus,
+.job-form-container select:focus,
+.job-form-container textarea:focus {
+  border-color:#f17b07; background:#fff;
+  box-shadow:0 0 0 3px rgba(241,123,7,0.18); outline:none;
+}
+.job-form-container textarea { height:130px; resize:none; }
+
+.skills-box { grid-column:span 2; display:flex; flex-wrap:wrap; gap:10px; }
+.skill-tag { padding:8px 16px; border-radius:20px; background:#f0f0f0; cursor:pointer; font-size:14px; transition:0.3s; }
+.skill-tag.active { background:#f17b07; color:#fff; font-weight:600; }
+
+.submit-btn {
+  width:100%; padding:15px; background:#272845; color:#fff;
+  border:none; font-size:18px; border-radius:10px; margin-top:10px;
+  cursor:pointer; font-weight:600; transition:0.3s;
+}
+.submit-btn:hover { background:#ca6730; }
+
+.location-dropdown {
+  padding:10px; font-size:16px; margin-bottom:20px;
+  border-radius:6px; border:1px solid #ccc;
 }
 
-.success-box p {
-  font-size: 17px;
-  color: #242845;
-}
-
-/* Alert popup */
-.job-alert-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(36, 40, 69, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.job-alert-box {
-  background: #ffffff;
-  padding: 25px 35px;
-  border-radius: 12px;
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-  animation: popIn 0.3s ease-out;
-  position: relative;
-}
-
-.job-alert-box p {
-  font-size: 17px;
-  color: #242845;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  font-size: 26px;
-  color: #272845;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.close-btn:hover {
-  color: #004a99;
-}
-
-/* Animation */
-@keyframes popIn {
-  from {
-    transform: scale(0.75);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-.terms-list {
-  margin: 15px 0;
-  padding-left: 20px;
-  color: #242845;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.terms-checkbox {
-  margin: 20px 0;
-  font-size: 16px;
-  color: #444;
-}
-
-.terms-checkbox input {
-  margin-right: 10px;
-}
-/* Inline Success Popup (centered in form area) */
-.inline-success-popup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px; /* spacing below form */
-}
-
-.inline-success-box {
-  background: #28a745; /* Bootstrap green */
-  color: #fff;
-  padding: 20px 30px;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-  animation: fadeIn 0.4s ease-out;
-}
-
-.inline-success-box h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.inline-success-box p {
-  font-size: 16px;
-  margin: 0;
-}
-
-/* Animation */
-@keyframes fadeIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
 

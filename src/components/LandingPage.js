@@ -1,15 +1,11 @@
-
-import HomeSlider from './HomeSlider';
+import HomeSlider from "./HomeSlider";
 
 const LandingPage = () => {
   return (
-    <>
-      <section id="home">
-        <HomeSlider />
-      </section>
-
-     
-    </>
+    <section id="home">
+      <HomeSlider />
+      {/* No Router or Routes here */}
+    </section>
   );
 };
 

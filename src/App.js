@@ -8,6 +8,16 @@ import Contact from "./components/Contact";
 import Drawing from "./components/Drawing";
 import AdminPanel from "./components/AdminPanel";
 import CareerApplicationPage from "./components/CareerApplicationPage";
+import CompanyOverview from "./components/CompanyOverview";
+import RebarDetailing from "./pages/RebarDetail";
+import RebarEstimation from "./pages/RebarEstimation";
+
+import ArchitecturalService from "./pages/ArchitecturalService";
+import MechanicalService from "./pages/MechanicalService";
+import BIMService from "./pages/BimService";
+import PrecastDetailing from "./pages/PrecastDetailing";
+import ApplyFormPage from "./components/ApplyFormPage";
+
 
 
 
@@ -19,7 +29,19 @@ function App() {
       
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/career" element={<CareerApplicationPage />} />
+        <Route path="/apply/:jobId" element={<ApplyFormPage />} />
+         <Route path="/rebar-detailing" element={<RebarDetailing />} />
+         <Route path="/rebar-estimation" element={<RebarEstimation/>} />
+         <Route path="/precast-detailing" element={<PrecastDetailing/>} />
+         <Route path="/architectural-services" element={<ArchitecturalService/>} />
+         <Route path="/mechanical-services" element={<MechanicalService/>} />
+         <Route path="/bim-services" element={<BIMService/>} />
+         
+          
+         
         <Route path="/about" element={<About />} />
+        <Route path="/company-overview" element={<CompanyOverview />} />
         <Route path="/service" element={<Service />} />
         <Route path="/careers/apply" element={<CareerApplicationPage />} />
         <Route path="/career" element={<Career />} />
