@@ -3,11 +3,21 @@ const cors = require("cors");
 const multer = require("multer");
 const mysql = require("mysql2");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Ensure uploads folder exists (Render restarts delete it)
+const uploadDir = path.join(process.cwd(), "uploads");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 // Serve resume files
 app.use("/uploads", express.static("uploads"));
@@ -22,17 +32,28 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// MySQL Connection
+// MySQL Connection (use env variables in Render)
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123456",
-  database: "job_portal"
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASS || "123456",
+  database: process.env.DB_NAME || "job_portal"
 });
 
 db.connect((err) => {
   if (err) console.log("DB ERROR", err);
   else console.log("MySQL Connected");
+});
+
+// ========================
+// HEALTH CHECK ROUTES
+// ========================
+app.get("/", (req, res) => {
+  res.send("Backend is live ✅");
+});
+
+app.get("/apply", (req, res) => {
+  res.send("Apply endpoint is live. Use POST to submit resume.");
 });
 
 // ========================
@@ -135,4 +156,4 @@ app.delete("/admin/contacts/:id", (req, res) => {
 // ========================
 // SERVER START
 // ========================
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
