@@ -59,6 +59,11 @@ app.get("/apply", (req, res) => {
 // ========================
 // APPLY JOB ROUTE
 // ========================
+// Health check for /apply
+app.get("/apply", (req, res) => {
+  res.send("Apply endpoint is live. Use POST to submit resume.");
+});
+
 app.post("/apply", upload.single("resume"), (req, res) => {
   const {
     jobTitle,
@@ -109,6 +114,7 @@ app.post("/apply", upload.single("resume"), (req, res) => {
 // ========================
 // CONTACT FORM ROUTE
 // ========================
+
 app.post("/contact", (req, res) => {
   const { name, email, message } = req.body;
 
