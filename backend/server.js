@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: ["https://public-jwy3.vercel.app"], // Vercel frontend domain
+  origin: ["https://public-beta-rose.vercel.app"], // Vercel frontend domain
   methods: ["GET", "POST", "DELETE"],
   credentials: true
 }));
