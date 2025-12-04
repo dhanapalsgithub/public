@@ -1,59 +1,84 @@
-/* application.css */
-
-/* JOB APPLICATION FORM */
-.job-form-container {
-  background: #fff;
-  padding: 40px 45px;
-  border-radius: 14px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  margin: 30px auto;
-  max-width: 900px;
-
-  /* Correct path usage */
-  background-image: url('../assets/career.png');
-  background-size: cover;       /* image fills container */
-  background-position: center;  /* center alignment */
-  background-repeat: no-repeat; /* avoid tiling */
+.application-form {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.job-form-container h2 {
-  font-size:26px;
-  font-weight:700;
-  margin-bottom:25px;
-  color:#242845;
-  text-align:center;
-}
-.job-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px 22px; }
-.full { grid-column:span 2; }
-
-.job-form-container input,
-.job-form-container select,
-.job-form-container textarea {
-  width:100%; padding:14px 16px; border:1px solid #ddd; border-radius:8px;
-  background:#fafafa; font-size:15px; transition:0.25s;
-}
-.job-form-container input:focus,
-.job-form-container select:focus,
-.job-form-container textarea:focus {
-  border-color:#f17b07; background:#fff;
-  box-shadow:0 0 0 3px rgba(241,123,7,0.18); outline:none;
-}
-.job-form-container textarea { height:130px; resize:none; }
-
-.skills-box { grid-column:span 2; display:flex; flex-wrap:wrap; gap:10px; }
-.skill-tag { padding:8px 16px; border-radius:20px; background:#f0f0f0; cursor:pointer; font-size:14px; transition:0.3s; }
-.skill-tag.active { background:#f17b07; color:#fff; font-weight:600; }
-
-.submit-btn {
-  width:100%; padding:15px; background:#272845; color:#fff;
-  border:none; font-size:18px; border-radius:10px; margin-top:10px;
-  cursor:pointer; font-weight:600; transition:0.3s;
-}
-.submit-btn:hover { background:#ca6730; }
-
-.location-dropdown {
-  padding:10px; font-size:16px; margin-bottom:20px;
-  border-radius:6px; border:1px solid #ccc;
+.application-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
 
+.application-form input,
+.application-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
 
+.application-form input:focus,
+.application-form textarea:focus {
+  border-color: #0078d7; /* Microsoft blue */
+  outline: none;
+}
+
+.application-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.application-form input[type="file"] {
+  border: none;
+  padding: 6px 0;
+}
+
+.application-form button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  background: #0078d7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.application-form button:hover {
+  background: #005fa3;
+}
+
+.application-form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ✅ Responsive */
+@media (max-width: 480px) {
+  .application-form {
+    padding: 20px;
+  }
+
+  .application-form h2 {
+    font-size: 20px;
+  }
+
+  .application-form input,
+  .application-form textarea {
+    font-size: 14px;
+  }
+
+  .application-form button {
+    font-size: 15px;
+  }
+}

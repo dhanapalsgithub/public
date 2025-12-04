@@ -7,7 +7,7 @@ const fs = require("fs");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // ========================
 // Middleware
@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // ========================
-// MySQL Connection
+// MySQL Connection (Railway)
 // ========================
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -46,7 +46,7 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME,
   port: Number(process.env.DB_PORT),
   connectTimeout: 20000,
-  charset: "utf8mb4" // ✅ Tamil + emoji support
+  charset: "utf8mb4"
 });
 
 db.connect((err) => {
