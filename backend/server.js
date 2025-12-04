@@ -9,9 +9,7 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// ========================
 // Middleware
-// ========================
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,13 +19,9 @@ const uploadDir = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
-
-// Serve resume files
 app.use("/uploads", express.static("uploads"));
 
-// ========================
 // Multer Storage
-// ========================
 const storage = multer.diskStorage({
   destination: "./uploads/",
   filename: (req, file, cb) => {
@@ -36,15 +30,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// ========================
-// MySQL Connection (Railway)
-// ========================
+// MySQL Connection
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  port: Number(process.env.DB_PORT),
   connectTimeout: 20000,
   charset: "utf8mb4"
 });
@@ -57,55 +49,40 @@ db.connect((err) => {
   }
 });
 
-// ========================
-// HEALTH CHECK
-// ========================
+// Health Check
 app.get("/", (req, res) => {
   res.send("Backend is live ✅");
 });
 
-app.get("/apply", (req, res) => {
-  res.send("Apply endpoint is live. Use POST to submit resume.");
-});
-
-// ========================
-// CONTACT FORM
-// ========================
+// Contact Form
 app.post("/contact", (req, res) => {
-  const { name, email, message } = req.body;
-
+  const { name = "", email = "", message = "" } = req.body;
   const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
-
-  db.query(sql, [name, email, message], (err, result) => {
+  db.query(sql, [name, email, message], (err) => {
     if (err) {
       console.error("CONTACT ERROR:", err.sqlMessage || err.message || err);
-      return res.status(500).json({
-        message: "DB Insert Error",
-        error: err.sqlMessage || err.message
-      });
+      return res.status(500).json({ message: "DB Insert Error", error: err.sqlMessage || err.message });
     }
     res.json({ message: "Message Sent Successfully!" });
   });
 });
 
-// ========================
-// APPLY JOB
-// ========================
+// Apply Job
 app.post("/apply", upload.single("resume"), (req, res) => {
   const {
-    jobTitle,
-    firstName,
-    lastName,
-    email,
-    phone,
-    experience,
-    linkedin,
-    portfolio,
-    message,
-    skills
+    jobTitle = "",
+    firstName = "",
+    lastName = "",
+    email = "",
+    phone = "",
+    experience = "",
+    linkedin = "",
+    portfolio = "",
+    message = "",
+    skills = ""
   } = req.body;
 
-  const resumeFile = req.file ? req.file.filename : null;
+  const resumeFile = req.file ? req.file.filename : "";
 
   const sql = `
     INSERT INTO applications 
@@ -113,37 +90,19 @@ app.post("/apply", upload.single("resume"), (req, res) => {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  db.query(
-    sql,
-    [
-      jobTitle,
-      firstName,
-      lastName,
-      email,
-      phone,
-      experience,
-      linkedin,
-      portfolio,
-      message,
-      skills,
-      resumeFile
-    ],
-    (err) => {
-      if (err) {
-        console.error("APPLICATION ERROR:", err.sqlMessage || err.message || err);
-        return res.status(500).json({
-          message: "DB Insert Error",
-          error: err.sqlMessage || err.message
-        });
-      }
-      res.json({ message: "Application Submitted!" });
+  db.query(sql, [
+    jobTitle, firstName, lastName, email, phone,
+    experience, linkedin, portfolio, message, skills, resumeFile
+  ], (err) => {
+    if (err) {
+      console.error("APPLICATION ERROR:", err.sqlMessage || err.message || err);
+      return res.status(500).json({ message: "DB Insert Error", error: err.sqlMessage || err.message });
     }
-  );
+    res.json({ message: "Application Submitted!" });
+  });
 });
 
-// ========================
-// ADMIN ROUTES
-// ========================
+// Admin Routes
 app.get("/admin/contacts", (req, res) => {
   db.query("SELECT * FROM contacts ORDER BY id DESC", (err, result) => {
     if (err) return res.status(500).json({ message: "DB Error" });
@@ -166,7 +125,5 @@ app.delete("/admin/contacts/:id", (req, res) => {
   });
 });
 
-// ========================
-// SERVER START
-// ========================
+// Server Start
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
+import API from "../api";
 
+const JobApplicationForm = () => {
+  const location = useLocation();
+  const jobTitle = location.state?.jobTitle || "General Application";
 
-const JobApplicationForm = ({ jobTitle }) => {
   const [formData, setFormData] = useState({
+    jobTitle,
     firstName: "",
     lastName: "",
     email: "",
@@ -12,104 +16,74 @@ const JobApplicationForm = ({ jobTitle }) => {
     linkedin: "",
     portfolio: "",
     message: "",
-    skills: [],
-    resume: null,
+    skills: "",
   });
-
-  const skillsList = [
-    "Rebar Detailing", "Rebar Estimation", "AutoCAD", "Tekla",
-    "BBS", "Drawings", "CAD", "3D Modeling"
-  ];
+  const [resume, setResume] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData({ ...formData, [name]: files ? files[0] : value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const toggleSkill = (skill) => {
-    setFormData((prev) => ({
-      ...prev,
-      skills: prev.skills.includes(skill)
-        ? prev.skills.filter((s) => s !== skill)
-        : [...prev.skills, skill]
-    }));
+  const handleFileChange = (e) => {
+    setResume(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const data = new FormData();
-    data.append("jobTitle", jobTitle);
-    data.append("firstName", formData.firstName);
-    data.append("lastName", formData.lastName);
-    data.append("email", formData.email);
-    data.append("phone", formData.phone);
-    data.append("experience", formData.experience);
-    data.append("linkedin", formData.linkedin);
-    data.append("portfolio", formData.portfolio);
-    data.append("message", formData.message);
-    data.append("skills", formData.skills.join(", "));
-    data.append("resume", formData.resume);
+    Object.entries(formData).forEach(([key, value]) => {
+      data.append(key, value || "");
+    });
+    if (resume) {
+      data.append("resume", resume);
+    }
 
-    const res = await axios.post("http://localhost:5000/apply", data);
-
-    alert(res.data.message);
+    try {
+      const res = await API.post("/apply", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert(res.data.message || "Application Submitted!");
+      setFormData({
+        jobTitle,
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        experience: "",
+        linkedin: "",
+        portfolio: "",
+        message: "",
+        skills: "",
+      });
+      setResume(null);
+    } catch (err) {
+      console.error("Application error:", err.response?.data || err.message);
+      alert("Error submitting application. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
- <form onSubmit={handleSubmit} className="job-form-container">
-  <h2>Apply for {jobTitle}</h2>
-
-  <div className="job-form-grid">
-    <input name="firstName" placeholder="First Name" onChange={handleChange} />
-    <input name="lastName" placeholder="Last Name" onChange={handleChange} />
-    <input name="email" placeholder="Email" onChange={handleChange} />
-    <input name="phone" placeholder="Phone" onChange={handleChange} />
-
-    <select name="experience" className="full" onChange={handleChange}>
-      <option>Select Experience</option>
-      <option value="0-1">0–1</option>
-      <option value="1-3">1–3</option>
-      <option value="3-5">3–5</option>
-    </select>
-
-    <div className="skills-box">
-      {skillsList.map((skill) => (
-        <button
-          type="button"
-          key={skill}
-          className={`skill-tag ${
-            formData.skills.includes(skill) ? "active" : ""
-          }`}
-          onClick={() => toggleSkill(skill)}
-        >
-          {skill}
-        </button>
-      ))}
-    </div>
-
-    <input name="linkedin" placeholder="LinkedIn" />
-    <input name="portfolio" placeholder="Portfolio" />
-
-    <textarea
-      name="message"
-      placeholder="Message"
-      className="full"
-      onChange={handleChange}
-    ></textarea>
-
-    <input
-      type="file"
-      name="resume"
-      className="full"
-      onChange={handleChange}
-    />
-  </div>
-
-  <button type="submit" className="submit-btn">Submit Application</button>
-</form>
-
-
+    <form onSubmit={handleSubmit} className="application-form">
+      <h2>Apply for {jobTitle}</h2>
+      <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
+      <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
+      <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+      <input type="text" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} />
+      <input type="text" name="experience" placeholder="Experience" value={formData.experience} onChange={handleChange} />
+      <input type="url" name="linkedin" placeholder="LinkedIn Profile" value={formData.linkedin} onChange={handleChange} />
+      <input type="url" name="portfolio" placeholder="Portfolio URL" value={formData.portfolio} onChange={handleChange} />
+      <textarea name="message" placeholder="Message" value={formData.message} onChange={handleChange}></textarea>
+      <textarea name="skills" placeholder="Skills" value={formData.skills} onChange={handleChange}></textarea>
+      <input type="file" name="resume" onChange={handleFileChange} />
+      <button type="submit" disabled={loading}>
+        {loading ? "Submitting..." : "Submit Application"}
+      </button>
+    </form>
   );
 };
 
