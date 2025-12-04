@@ -10,7 +10,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ["https://public-jwy3.vercel.app"], // Vercel frontend domain
+  methods: ["GET", "POST", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -125,5 +129,5 @@ app.delete("/admin/contacts/:id", (req, res) => {
   });
 });
 
-// Server Start
+// Server Start (only once!)
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
