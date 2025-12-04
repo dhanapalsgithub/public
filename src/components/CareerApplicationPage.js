@@ -1,100 +1,71 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Career.css";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import { useLocation } from "react-router-dom";
+import API from '../api';
+import "./CareerApplicationPage.css";
 
-const jobData = {
-    India: [
-        { id: 1, title: "Senior Rebar Detailer / CAD Technician" },
-        { id: 2, title: "Junior Rebar Detailer / CAD Technician" },
-    ],
-    USA: [],
-    Canada: [],
-    Europe: [],
-    UAE: [],
+const JobApplicationForm = () => {
+  const location = useLocation();
+  const jobTitle = location.state?.jobTitle || "";
+
+  const [formData, setFormData] = useState({
+    jobTitle: jobTitle,
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    experience: "",
+    linkedin: "",
+    portfolio: "",
+    message: "",
+    skills: "",
+  });
+  const [resume, setResume] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    setResume(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    Object.keys(formData).forEach((key) => {
+      data.append(key, formData[key]);
+    });
+    if (resume) {
+      data.append("resume", resume);
+    }
+
+    try {
+      const res = await API.post("/apply", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert(res.data.message);
+    } catch (err) {
+      console.error(err);
+      alert("Error submitting application");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="application-form">
+      <h2>Apply for {jobTitle}</h2>
+      <input type="text" name="firstName" placeholder="First Name" onChange={handleChange} required />
+      <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required />
+      <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+      <input type="text" name="phone" placeholder="Phone" onChange={handleChange} />
+      <input type="text" name="experience" placeholder="Experience" onChange={handleChange} />
+      <input type="url" name="linkedin" placeholder="LinkedIn Profile" onChange={handleChange} />
+      <input type="url" name="portfolio" placeholder="Portfolio URL" onChange={handleChange} />
+      <textarea name="message" placeholder="Message" onChange={handleChange}></textarea>
+      <textarea name="skills" placeholder="Skills" onChange={handleChange}></textarea>
+      <input type="file" name="resume" onChange={handleFileChange} />
+      <button type="submit">Submit Application</button>
+    </form>
+  );
 };
 
-const CareerApplicationPage = () => {
-    const [selectedLocation, setSelectedLocation] = useState("");
-    const [acceptedTerms, setAcceptedTerms] = useState(false);
-    const navigate = useNavigate();
-
-    const handleLocationChange = (e) => {
-        setSelectedLocation(e.target.value);
-    };
-
-    // NEW → Navigate to new page
-    const goToApplicationPage = (job) => {
-        navigate(`/apply/${job.id}`, { state: { jobTitle: job.title } });
-    };
-
-    return (
-        <>
-            <NavBar />
-
-            <div className="job-section">
-                <h3 className="job-location-title">Terms & Conditions</h3>
-                <ul className="terms-list">
-                    <li>✔ You must have a valid passport.</li>
-                    <li>✔ You should be willing to relocate anywhere if required.</li>
-                    <li>✔ You agree to provide accurate information in your application.</li>
-                </ul>
-
-                <div className="terms-checkbox">
-                    <input
-                        type="checkbox"
-                        id="acceptTerms"
-                        checked={acceptedTerms}
-                        onChange={(e) => setAcceptedTerms(e.target.checked)}
-                    />
-                    <label htmlFor="acceptTerms">I agree to the above terms & conditions.</label>
-                </div>
-
-                <h3 className="job-location-title">Select Location</h3>
-
-                <select
-                    className="location-dropdown"
-                    value={selectedLocation}
-                    onChange={handleLocationChange}
-                    disabled={!acceptedTerms}
-                >
-                    <option value="">-- Choose Location --</option>
-                    <option value="India">India</option>
-                    <option value="USA">USA</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Europe">Europe</option>
-                    <option value="UAE">UAE</option>
-                </select>
-
-                {selectedLocation && (
-                    <>
-                        <h3 className="job-location-title">Location: {selectedLocation}</h3>
-
-                        {jobData[selectedLocation].length > 0 ? (
-                            <div className="job-left">
-                                {jobData[selectedLocation].map((job) => (
-                                    <div key={job.id} className="job-card">
-                                        <span>{job.title}</span>
-                                        <span
-                                            className="plus-icon"
-                                            onClick={() => goToApplicationPage(job)}
-                                        >
-                                            +
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="no-jobs-text">🚫 No job vacancies available for this location.</p>
-                        )}
-                    </>
-                )}
-            </div>
-
-            <Footer />
-        </>
-    );
-};
-
-export default CareerApplicationPage;
+export default JobApplicationForm;

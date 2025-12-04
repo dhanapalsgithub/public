@@ -27,7 +27,7 @@ const Footer = () => {
         <Grid item xs={12} md={3}>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
             <img src={logo} alt="R&I Logo" style={{ height: 100, width: 95, marginRight: 12 }} />
-            <Typography variant="h6">R&I Engineering And Technology</Typography>
+            
           </Box>
 
           <Typography variant="body2" sx={{ mb: 2 }}>

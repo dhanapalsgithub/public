@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import girlImg from '../assets/contact -girl.jpg';
 import logo from '../assets/logo101.png';
+import API from '../api'; // axios instance
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const Contact = () => {
   });
 
   const [successPopup, setSuccessPopup] = useState(false);
+  const [loading, setLoading] = useState(false); // ✅ optional spinner
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,23 +23,30 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // ✅ Basic validation
+    if (!formData.name || !formData.email || !formData.message) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await API.post("/contact", formData);
 
-      // Success popup
-      setSuccessPopup(true);
-      setTimeout(() => setSuccessPopup(false), 3000);
-
-      // Reset form
-      setFormData({ name: '', email: '', message: '' });
-
+      if (response.status === 200 && response.data.message === "Message Sent Successfully!") {
+        setSuccessPopup(true);
+        setTimeout(() => setSuccessPopup(false), 3000);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        console.error("Unexpected response:", response);
+        alert("Error sending message");
+      }
     } catch (err) {
-      console.error(err);
-      alert("Error sending message");
+      console.error("Axios error:", err.response?.data || err.message);
+      alert("Error sending message\n" + (err.response?.data?.error || ""));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,7 +54,7 @@ const Contact = () => {
     <>
       <NavBar />
 
-      {/* SUCCESS POPUP */}
+      {/* ✅ SUCCESS POPUP */}
       {successPopup && (
         <div className="success-popup-overlay">
           <div className="success-popup-modal">
@@ -63,26 +72,19 @@ const Contact = () => {
         </div>
       )}
 
-
-
       <div id="contact" className="section contact-container">
-
-        {/* LEFT SIDE */}
+        {/* ✅ LEFT SIDE */}
         <div className="contact-left">
           <h2>Contact Us</h2>
-
           <img src={logo} alt="Logo" className="left-image" />
-
           <p>
             <strong>R & I Engineering And Technology</strong><br />
             Kundrathur Main Road, Eswara Nagar, Kovur, Sikakarayapuram,<br />
             Kancheepuram, Tamil Nadu - 600119
           </p>
-
           <p>Email: riengineeringtech@yahoo.com</p>
           <p>Phone: +91 9790186728</p>
           <p>Landline: +91 9876543210</p>
-
           <div className="map-container">
             <iframe
               title="R & I Location"
@@ -95,12 +97,10 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* RIGHT FORM */}
+        {/* ✅ RIGHT FORM */}
         <div className="contact-right">
           <img src={girlImg} alt="Contact Girl" className="contact-form-image" />
-
           <h2>Send Us a Message</h2>
-
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -110,7 +110,6 @@ const Contact = () => {
               onChange={handleChange}
               required
             />
-
             <input
               type="email"
               name="email"
@@ -119,7 +118,6 @@ const Contact = () => {
               onChange={handleChange}
               required
             />
-
             <textarea
               name="message"
               placeholder="Your Message"
@@ -128,8 +126,9 @@ const Contact = () => {
               onChange={handleChange}
               required
             ></textarea>
-
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Sending..." : "Submit"}
+            </button>
           </form>
         </div>
       </div>

@@ -5,10 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", sans-serif;
-   background-image: url('../assets/career.png');
-  background-size: cover;       /* image fills container */
-  background-position: center;  /* center alignment */
-  background-repeat: no-repeat; /* avoid tiling */
+ 
 }
   
 

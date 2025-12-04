@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./AdminPanel.css";
+import API from '../api';
 
 function AdminPanel() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isAdmin") === "true");
@@ -12,13 +13,13 @@ function AdminPanel() {
   // Fetch data
   const fetchData = async () => {
     try {
-      const contactRes = await fetch("http://localhost:5000/admin/contacts");
-      setContacts(await contactRes.json());
+      const contactRes = await API.get("/admin/contacts");
+      setContacts(contactRes.data);
 
-      const appRes = await fetch("http://localhost:5000/admin/applications");
-      setApplications(await appRes.json());
+      const appRes = await API.get("/admin/applications");
+      setApplications(appRes.data);
     } catch (err) {
-      console.log(err);
+      console.error("Error fetching admin data:", err);
     }
   };
 
@@ -108,7 +109,14 @@ function AdminPanel() {
                   <td>{a.email}</td>
                   <td>{a.phone}</td>
                   <td>
-                    {a.resume ? <a href={`http://localhost:5000/uploads/${a.resume}`} download>Download</a> : "No file"}
+                    {a.resume ? (
+                      <a
+                        href={`${process.env.REACT_APP_API_URL}/uploads/${a.resume}`}
+                        download
+                      >
+                        Download
+                      </a>
+                    ) : "No file"}
                   </td>
                 </tr>
               ))}
