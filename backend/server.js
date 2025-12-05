@@ -8,8 +8,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-// --- 1. Middleware (CORS Configuration - Crucial for Vercel) ---
-// This configuration allows requests ONLY from the specified Vercel domains and localhost.
+// --- 1. Middleware (CORS Configuration) ---
+// Allows requests ONLY from the specified Vercel domains and localhost.
 app.use(cors({
     origin: [
         "https://public-jwy3.vercel.app", 
@@ -22,7 +22,7 @@ app.use(cors({
     optionsSuccessStatus: 200 
 }));
 
-// Recommended: Explicitly handle OPTIONS (preflight) requests for maximum CORS stability
+// Recommended: Explicitly handle OPTIONS (preflight) requests
 app.options('*', cors({
     origin: [
         "https://public-jwy3.vercel.app", 
@@ -109,5 +109,8 @@ app.delete("/admin/contacts/:id", (req, res) => {
 });
 
 
-// Server Start
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Server Start (FIXED: Explicitly binds to 0.0.0.0 for Railway/Cloud environments)
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, () => {
+    console.log(`Server running successfully on host ${HOST} and port ${PORT} ✅`);
+});
