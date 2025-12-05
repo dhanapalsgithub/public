@@ -8,29 +8,33 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-// --- 1. Middleware ---
+// --- 1. Middleware (UPDATED CORS CONFIGURATION) ---
+// Increased compatibility by allowing all common methods and headers.
 app.use(cors({
-    // Ensure the client URL is listed here
-    origin:["https://public-jwy3.vercel.app", "https://public-beta-rose.vercel.app","http://localhost:3001"], 
-    methods: ["GET", "POST", "DELETE", "OPTIONS"], 
+    origin: [
+        "https://public-jwy3.vercel.app", 
+        "https://public-beta-rose.vercel.app",
+        "http://localhost:3001"
+    ], 
+    methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"], // Added PUT for completeness
     credentials: true,
-    allowedHeaders: ["Content-Type"] 
+    // FIX: AllowedHeaders is often the culprit for CORS errors on POST/PUT requests
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"], 
+    optionsSuccessStatus: 200 // Some older browsers need this
 }));
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 
-// --- 2. Email Transporter Setup (REQUIRED FOR MAILING CONTACT FORM SUBMISSIONS) ---
-// **IMPORTANT: Replace "smtp.example.com" with your actual SMTP host (e.g., smtp.gmail.com).**
-// **If using Gmail, set 'secure: true' and 'port: 465'.**
+// --- 2. Email Transporter Setup ---
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com", // <-- FIX/UPDATE THIS
-    port: 465, // <-- FIX/UPDATE THIS (e.g., 465 for secure Gmail)
-    secure: true, // <-- FIX/UPDATE THIS (e.g., true for 465)
+    host: "smtp.gmail.com", 
+    port: 465, 
+    secure: true, 
     auth: {
-        user: process.env.EMAIL_USER,    // Your sender email
-        pass: process.env.EMAIL_PASS     // Your App Password
+        user: process.env.EMAIL_USER,    
+        pass: process.env.EMAIL_PASS     
     },
     pool: true,
     maxConnections: 1,
@@ -39,7 +43,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// --- 3. MySQL Connection (Using Pool for Production Robustness) ---
+// --- 3. MySQL Connection ---
 const db = mysql.createPool({ 
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
@@ -69,7 +73,7 @@ app.get("/", (req, res) => {
     res.send("Backend is live ✅");
 });
 
-// Contact Form Submission (Saves to DB and Sends Email)
+// Contact Form Submission
 app.post("/contact", (req, res) => {
     const { name = "", email = "", message = "" } = req.body; 
     
@@ -84,7 +88,7 @@ app.post("/contact", (req, res) => {
         // 2. Send Email Notification
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: "riengineeringtech@yahoo.com", // <-- SET YOUR ADMIN RECEIVING EMAIL
+            to: "riengineeringtech@yahoo.com", 
             subject: `New Contact Form Submission from ${name}`,
             html: `
                 <h3>New Message Received</h3>
@@ -98,7 +102,6 @@ app.post("/contact", (req, res) => {
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error("CONTACT EMAIL ERROR:", error.message);
-                // Note: We send success to client even if email fails, as DB insert was successful.
             } else {
                 console.log('Contact email sent: ' + info.response);
             }
