@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-// --- 1. Middleware (CORS Configuration) ---
+// --- 1. Middleware (CORS Configuration - Crucial for Vercel) ---
 // Allows requests ONLY from the specified Vercel domains and localhost.
 app.use(cors({
     origin: [
@@ -109,7 +109,7 @@ app.delete("/admin/contacts/:id", (req, res) => {
 });
 
 
-// Server Start (FIXED: Explicitly binds to 0.0.0.0 for Railway/Cloud environments)
+// Server Start (FIXED: Explicitly binds to 0.0.0.0 for Railway/Cloud environments to prevent 502 Bad Gateway)
 const HOST = '0.0.0.0';
 app.listen(PORT, HOST, () => {
     console.log(`Server running successfully on host ${HOST} and port ${PORT} ✅`);
