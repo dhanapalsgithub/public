@@ -1,49 +1,44 @@
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2"); 
-const nodemailer = require('nodemailer'); 
+// ❌ Nodemailer dependency and imports are fully removed.
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-// --- 1. Middleware (UPDATED CORS CONFIGURATION) ---
-// Increased compatibility by allowing all common methods and headers.
+// --- 1. Middleware (CORS Configuration - Crucial for Vercel) ---
+// This configuration allows requests ONLY from the specified Vercel domains and localhost.
 app.use(cors({
     origin: [
         "https://public-jwy3.vercel.app", 
         "https://public-beta-rose.vercel.app",
         "http://localhost:3001"
     ], 
-    methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"], // Added PUT for completeness
+    methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
     credentials: true,
-    // FIX: AllowedHeaders is often the culprit for CORS errors on POST/PUT requests
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"], 
-    optionsSuccessStatus: 200 // Some older browsers need this
+    optionsSuccessStatus: 200 
 }));
+
+// Recommended: Explicitly handle OPTIONS (preflight) requests for maximum CORS stability
+app.options('*', cors({
+    origin: [
+        "https://public-jwy3.vercel.app", 
+        "https://public-beta-rose.vercel.app", 
+        "http://localhost:3001"
+    ], 
+    methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
+    credentials: true,
+}));
+
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 
-// --- 2. Email Transporter Setup ---
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com", 
-    port: 465, 
-    secure: true, 
-    auth: {
-        user: process.env.EMAIL_USER,    
-        pass: process.env.EMAIL_PASS     
-    },
-    pool: true,
-    maxConnections: 1,
-    tls: {
-        rejectUnauthorized: false 
-    }
-});
-
-// --- 3. MySQL Connection ---
+// --- 2. MySQL Connection ---
 const db = mysql.createPool({ 
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
@@ -66,14 +61,14 @@ db.getConnection((err, connection) => {
     }
 });
 
-// --- 4. Routes ---
+// --- 3. Routes ---
 
 // Health Check
 app.get("/", (req, res) => {
     res.send("Backend is live ✅");
 });
 
-// Contact Form Submission
+// Contact Form Submission (Saves only to Database)
 app.post("/contact", (req, res) => {
     const { name = "", email = "", message = "" } = req.body; 
     
@@ -84,29 +79,8 @@ app.post("/contact", (req, res) => {
             console.error("CONTACT DB ERROR:", err.message);
             return res.status(500).json({ message: "DB Insert Error", error: err.message });
         }
-
-        // 2. Send Email Notification
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: "riengineeringtech@yahoo.com", 
-            subject: `New Contact Form Submission from ${name}`,
-            html: `
-                <h3>New Message Received</h3>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Message:</strong></p>
-                <p style="border: 1px solid #ccc; padding: 10px;">${message}</p>
-            `,
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error("CONTACT EMAIL ERROR:", error.message);
-            } else {
-                console.log('Contact email sent: ' + info.response);
-            }
-        });
         
+        // 2. Respond to Frontend after successful database save
         res.json({ message: "Message Sent Successfully!" });
     });
 });
@@ -114,7 +88,10 @@ app.post("/contact", (req, res) => {
 // Admin Route to Fetch Contacts
 app.get("/admin/contacts", (req, res) => {
     db.query("SELECT * FROM contacts ORDER BY id DESC", (err, result) => {
-        if (err) return res.status(500).json({ message: "DB Error" });
+        if (err) {
+            console.error("ADMIN FETCH DB ERROR:", err.message);
+            return res.status(500).json({ message: "DB Error" });
+        }
         res.json(result);
     });
 });
@@ -123,7 +100,10 @@ app.get("/admin/contacts", (req, res) => {
 app.delete("/admin/contacts/:id", (req, res) => {
     const id = req.params.id;
     db.query("DELETE FROM contacts WHERE id = ?", [id], (err) => {
-        if (err) return res.status(500).json({ message: "DB Delete Error" });
+        if (err) {
+            console.error("ADMIN DELETE DB ERROR:", err.message);
+            return res.status(500).json({ message: "DB Delete Error" });
+        }
         res.json({ message: "Message Deleted" });
     });
 });
