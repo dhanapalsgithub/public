@@ -1,12 +1,12 @@
 
-import { useNavigate } from "react-router-dom";
+
 import "./Career.css";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import careerImage from "../assets/career.png";
 
 const Career = () => {
-  const navigate = useNavigate();
+  
 
   return (
     <>
@@ -28,9 +28,14 @@ const Career = () => {
             <strong> "Intern Application"</strong> in the subject line.
           </p>
 
-          <button className="career-btn" onClick={() => navigate("/careers/apply")}>
-            JOIN OUR TEAM
+          <button className="career-btn" >
+
+           <h>Send mail </h>
+          <p>riengineeringtech@yahoo.com</p>
+          
+
           </button>
+          
 
           {/* Rules & Regulations Section */}
           <div className="career-rules">

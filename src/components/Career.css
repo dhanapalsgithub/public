@@ -51,9 +51,9 @@ body {
   margin-bottom: 12px;
 }
 .career-btn {
-  background: #272845;
+  background: lightblue;
   padding: 14px 35px;
-  color: #fff;
+  color: #272845;
   border-radius: 8px;
   font-size: 20px;
   cursor: pointer;
