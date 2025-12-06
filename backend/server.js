@@ -14,7 +14,7 @@ app.use(cors({
     origin: [
         "https://public-jwy3.vercel.app", 
         "https://public-beta-rose.vercel.app",
-        
+        "http://localhost:3001"
     ], 
     methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
     credentials: true,
@@ -27,7 +27,7 @@ app.options('*', cors({
     origin: [
         "https://public-jwy3.vercel.app", 
         "https://public-beta-rose.vercel.app", 
-        
+        "http://localhost:3001"
     ], 
     methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
     credentials: true,

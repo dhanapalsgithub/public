@@ -111,7 +111,8 @@ function AdminPanel() {
                   <td>
                     {a.resume ? (
                       <a
-                        href={`${process.env.REACT_APP_API_URL}/uploads/${a.resume}`}
+                        href={`${process.env.REACT_APP_API_BASE_URL}/uploads/${a.resume}`}
+
                         download
                       >
                         Download
