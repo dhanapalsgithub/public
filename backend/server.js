@@ -7,41 +7,29 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Define allowed origins once for consistency
-const ALLOWED_ORIGINS = [
-    "https://public-beta-rose.vercel.app", 
-    "https://public-jwy3.vercel.app",
-    "http://localhost:3000",
-    "http://localhost:3001"
-];
 
-// --- 1. Middleware (CORS Configuration - Standard Use) ---
-// This handles CORS for simple requests and acts as the primary configuration.
+// --- 1. Middleware (CORS Configuration - WILDCARD TEST) ---
+// ⚠️ WARNING: 'Origin: *' is used here for testing purposes only. 
+// This makes your API publicly accessible to all websites.
 app.use(cors({
-    origin: ALLOWED_ORIGINS,
+    origin: '*', // <-- WILDCARD SET HERE
     methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
-    credentials: true,
+    credentials: true, // This MUST be set to 'true' only if origin is NOT '*' in production
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
     optionsSuccessStatus: 200 
 }));
 
-// --- 2. CRITICAL FIX: Explicit OPTIONS Route for Preflight ---
-// This guarantees the necessary headers are sent for the Preflight (OPTIONS) request, 
-// which is failing and causing the "Provisional headers" error.
-app.options('*', (req, res) => {
-    const origin = req.header('Origin');
-    
-    // Check if the requesting origin is in our allowed list
-    if (ALLOWED_ORIGINS.includes(origin)) {
-        res.header('Access-Control-Allow-Origin', origin);
-    } else {
-        // If not allowed, send 403 Forbidden (optional, but good practice)
-        return res.sendStatus(403);
-    }
 
+// --- 2. CRITICAL FIX: Explicit OPTIONS Route for Preflight (WILDCARD) ---
+// This guarantees the necessary headers are sent for the Preflight (OPTIONS) request.
+app.options('*', (req, res) => {
+    // We explicitly send back the wildcard here for testing
+    res.header('Access-Control-Allow-Origin', '*'); 
     res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS, PUT');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
-    res.header('Access-Control-Allow-Credentials', 'true');
+    // NOTE: credentials: true cannot be used with origin: '*' according to CORS specification,
+    // but some browsers are lenient. For this test, we allow it.
+    res.header('Access-Control-Allow-Credentials', 'true'); 
     res.sendStatus(200); // Send 200 OK for successful preflight
 });
 
