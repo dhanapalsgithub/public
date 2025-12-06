@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const mysql = require("mysql2"); 
+const mysql = require("mysql2");
 // ❌ Nodemailer dependency and imports are fully removed.
 require("dotenv").config();
 
@@ -12,23 +12,31 @@ const PORT = process.env.PORT || 3000;
 // Allows requests ONLY from the specified Vercel domains and localhost.
 app.use(cors({
     origin: [
-        "https://public-jwy3.vercel.app", 
+        
         "https://public-beta-rose.vercel.app",
-        "http://localhost:3001"
-    ], 
+        
+        "http://localhost:3001",
+        "http://localhost:3000",
+    ],
     methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"], 
-    optionsSuccessStatus: 200 
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
+    optionsSuccessStatus: 200
 }));
 
 // Recommended: Explicitly handle OPTIONS (preflight) requests
 app.options('*', cors({
     origin: [
-        "https://public-jwy3.vercel.app", 
-        "https://public-beta-rose.vercel.app", 
-        "http://localhost:3001"
-    ], 
+
+        "https://public-beta-rose.vercel.app",
+
+
+        "http://localhost:3001",
+        "http://localhost:3000",
+
+
+
+    ],
     methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
     credentials: true,
 }));
@@ -39,7 +47,7 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 
 // --- 2. MySQL Connection ---
-const db = mysql.createPool({ 
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
     user: process.env.DB_USER,
@@ -48,7 +56,7 @@ const db = mysql.createPool({
     connectTimeout: 20000,
     charset: "utf8mb4",
     waitForConnections: true,
-    connectionLimit: 10, 
+    connectionLimit: 10,
     queueLimit: 0
 });
 
@@ -56,7 +64,7 @@ db.getConnection((err, connection) => {
     if (err) {
         console.error("DB ERROR:", err.sqlMessage || err.message || err);
     } else {
-        connection.release(); 
+        connection.release();
         console.log("MySQL Pool Connected and Ready ✅");
     }
 });
@@ -70,8 +78,8 @@ app.get("/", (req, res) => {
 
 // Contact Form Submission (Saves only to Database)
 app.post("/contact", (req, res) => {
-    const { name = "", email = "", message = "" } = req.body; 
-    
+    const { name = "", email = "", message = "" } = req.body;
+
     // 1. Save to Database
     const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
     db.query(sql, [name, email, message], (err) => {
@@ -79,7 +87,7 @@ app.post("/contact", (req, res) => {
             console.error("CONTACT DB ERROR:", err.message);
             return res.status(500).json({ message: "DB Insert Error", error: err.message });
         }
-        
+
         // 2. Respond to Frontend after successful database save
         res.json({ message: "Message Sent Successfully!" });
     });
