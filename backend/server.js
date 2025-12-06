@@ -8,38 +8,29 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-// --- 1. Middleware (CORS Configuration - Crucial for Vercel) ---
-// Allows requests ONLY from the specified Vercel domains and localhost.
+// --- 1. Middleware (CORS Configuration - Simplified and Consolidated) ---
+// THIS IS THE CRITICAL SECTION: app.use(cors) handles both simple and preflight (OPTIONS) requests.
 app.use(cors({
-    origin: [
-        
-        "https://public-beta-rose.vercel.app",
-        
-        "http://localhost:3001",
-        "http://localhost:3000",
-    ],
-    methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
-    optionsSuccessStatus: 200
+    origin: [
+        // 1. Active Vercel Production Domain
+        "https://public-beta-rose.vercel.app", 
+        "https://public-jwy3.vercel.app",
+        // 2. Add any other Vercel URL that might be accessing the backend (e.g., Preview/Old branches)
+        // Add specific Vercel URL, if different from above:
+        // "https://your-current-live-client.vercel.app", 
+        
+        // 3. Local Development Origins (Client fallback is 3000)
+        "http://localhost:3000", // Client fallback
+        "http://localhost:3001"  // If client ever runs on 3001
+    ],
+    methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
+    optionsSuccessStatus: 200 // Ensures successful preflight requests return 200 OK
 }));
 
-// Recommended: Explicitly handle OPTIONS (preflight) requests
-app.options('*', cors({
-    origin: [
-
-        "https://public-beta-rose.vercel.app",
-
-
-        "http://localhost:3001",
-        "http://localhost:3000",
-
-
-
-    ],
-    methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
-    credentials: true,
-}));
+// ❌ The redundant app.options('*', cors({...})) block has been removed, 
+//    as the app.use(cors) middleware handles it globally.
 
 
 app.use(express.json({ limit: "50mb" }));
@@ -48,77 +39,77 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // --- 2. MySQL Connection ---
 const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    connectTimeout: 20000,
-    charset: "utf8mb4",
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    connectTimeout: 20000,
+    charset: "utf8mb4",
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 db.getConnection((err, connection) => {
-    if (err) {
-        console.error("DB ERROR:", err.sqlMessage || err.message || err);
-    } else {
-        connection.release();
-        console.log("MySQL Pool Connected and Ready ✅");
-    }
+    if (err) {
+        console.error("DB ERROR:", err.sqlMessage || err.message || err);
+    } else {
+        connection.release();
+        console.log("MySQL Pool Connected and Ready ✅");
+    }
 });
 
 // --- 3. Routes ---
 
 // Health Check
 app.get("/", (req, res) => {
-    res.send("Backend is live ✅");
+    res.send("Backend is live ✅");
 });
 
 // Contact Form Submission (Saves only to Database)
 app.post("/contact", (req, res) => {
-    const { name = "", email = "", message = "" } = req.body;
+    const { name = "", email = "", message = "" } = req.body;
 
-    // 1. Save to Database
-    const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
-    db.query(sql, [name, email, message], (err) => {
-        if (err) {
-            console.error("CONTACT DB ERROR:", err.message);
-            return res.status(500).json({ message: "DB Insert Error", error: err.message });
-        }
+    // 1. Save to Database
+    const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
+    db.query(sql, [name, email, message], (err) => {
+        if (err) {
+            console.error("CONTACT DB ERROR:", err.message);
+            return res.status(500).json({ message: "DB Insert Error", error: err.message });
+        }
 
-        // 2. Respond to Frontend after successful database save
-        res.json({ message: "Message Sent Successfully!" });
-    });
+        // 2. Respond to Frontend after successful database save
+        res.json({ message: "Message Sent Successfully!" });
+    });
 });
 
 // Admin Route to Fetch Contacts
 app.get("/admin/contacts", (req, res) => {
-    db.query("SELECT * FROM contacts ORDER BY id DESC", (err, result) => {
-        if (err) {
-            console.error("ADMIN FETCH DB ERROR:", err.message);
-            return res.status(500).json({ message: "DB Error" });
-        }
-        res.json(result);
-    });
+    db.query("SELECT * FROM contacts ORDER BY id DESC", (err, result) => {
+        if (err) {
+            console.error("ADMIN FETCH DB ERROR:", err.message);
+            return res.status(500).json({ message: "DB Error" });
+        }
+        res.json(result);
+    });
 });
 
 // Admin Route to Delete Contact
 app.delete("/admin/contacts/:id", (req, res) => {
-    const id = req.params.id;
-    db.query("DELETE FROM contacts WHERE id = ?", [id], (err) => {
-        if (err) {
-            console.error("ADMIN DELETE DB ERROR:", err.message);
-            return res.status(500).json({ message: "DB Delete Error" });
-        }
-        res.json({ message: "Message Deleted" });
-    });
+    const id = req.params.id;
+    db.query("DELETE FROM contacts WHERE id = ?", [id], (err) => {
+        if (err) {
+            console.error("ADMIN DELETE DB ERROR:", err.message);
+            return res.status(500).json({ message: "DB Delete Error" });
+        }
+        res.json({ message: "Message Deleted" });
+    });
 });
 
 
 // Server Start (FIXED: Explicitly binds to 0.0.0.0 for Railway/Cloud environments to prevent 502 Bad Gateway)
 const HOST = '0.0.0.0';
 app.listen(PORT, HOST, () => {
-    console.log(`Server running successfully on host ${HOST} and port ${PORT} ✅`);
+    console.log(`Server running successfully on host ${HOST} and port ${PORT} ✅`);
 });
