@@ -7,37 +7,50 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Define allowed origins once for consistency
+const ALLOWED_ORIGINS = [
+    "https://public-beta-rose.vercel.app", 
+    "https://public-jwy3.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:3001"
+];
 
-// --- 1. Middleware (CORS Configuration - Simplified and Consolidated) ---
-// THIS IS THE CRITICAL SECTION: app.use(cors) handles both simple and preflight (OPTIONS) requests.
+// --- 1. Middleware (CORS Configuration - Standard Use) ---
+// This handles CORS for simple requests and acts as the primary configuration.
 app.use(cors({
-    origin: [
-        // 1. Active Vercel Production Domain
-        "https://public-beta-rose.vercel.app", 
-        "https://public-jwy3.vercel.app",
-        // 2. Add any other Vercel URL that might be accessing the backend (e.g., Preview/Old branches)
-        // Add specific Vercel URL, if different from above:
-        // "https://your-current-live-client.vercel.app", 
-        
-        // 3. Local Development Origins (Client fallback is 3000)
-        "http://localhost:3000", // Client fallback
-        "http://localhost:3001"  // If client ever runs on 3001
-    ],
+    origin: ALLOWED_ORIGINS,
     methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
-    optionsSuccessStatus: 200 // Ensures successful preflight requests return 200 OK
+    optionsSuccessStatus: 200 
 }));
 
-// ❌ The redundant app.options('*', cors({...})) block has been removed, 
-//    as the app.use(cors) middleware handles it globally.
+// --- 2. CRITICAL FIX: Explicit OPTIONS Route for Preflight ---
+// This guarantees the necessary headers are sent for the Preflight (OPTIONS) request, 
+// which is failing and causing the "Provisional headers" error.
+app.options('*', (req, res) => {
+    const origin = req.header('Origin');
+    
+    // Check if the requesting origin is in our allowed list
+    if (ALLOWED_ORIGINS.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin);
+    } else {
+        // If not allowed, send 403 Forbidden (optional, but good practice)
+        return res.sendStatus(403);
+    }
+
+    res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS, PUT');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200); // Send 200 OK for successful preflight
+});
 
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 
-// --- 2. MySQL Connection ---
+// --- 3. MySQL Connection ---
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
@@ -60,7 +73,7 @@ db.getConnection((err, connection) => {
     }
 });
 
-// --- 3. Routes ---
+// --- 4. Routes ---
 
 // Health Check
 app.get("/", (req, res) => {
