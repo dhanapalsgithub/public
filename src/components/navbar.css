@@ -81,6 +81,14 @@
 .contact-right button:hover {
   background-color: #ca6730;
 }
+/* Define the golden color highlight for the active navigation link */
+.nav-link.active {
+    /* Golden Color */
+    color: #ca6730!important; /* Gold color */
+    font-weight: bold; /* Optional: Make the text bolder */
+    border-bottom: 2px solid #FFD700; /* Optional: Add a subtle underline */
+    padding-bottom: 5px; /* Adjust padding if using border-bottom */
+}
 
 /* RESPONSIVE FIX */
 @media (max-width: 768px) {
@@ -106,3 +114,4 @@
     height: 150px;
   }
 }
+

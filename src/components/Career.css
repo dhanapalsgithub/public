@@ -1,193 +1,593 @@
 /* ================================
-   GLOBAL
+    GLOBAL
 ==================================*/
 body {
-  margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", sans-serif;
- 
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
 }
-  
-
-
 
 /* ================================
-   HERO SECTION
+    HERO SECTION
 ==================================*/
 .career-hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 70px 8%;
-  background: #f7f9fc;
-  gap: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 8%;
+    background: #f7f9fc;
+    gap: 80px;
 }
-
 
 .career-hero-left {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
+
 .career-hero-img {
-  max-width: 600px;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+
+    width: 90vh;
+    height: 90vh;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Reduced shadow for cleaner look */
+    transition: none;
+    /* Removed hover animation */
+
 }
-.career-hero-right { flex: 1.2; }
+
+.career-hero-right {
+    flex: 1.2;
+}
+
 .career-title {
-  font-size: 48px;
-  font-weight: 800;
-  color: #242845;
-  margin-bottom: 15px;
+    font-size: 32px;
+    font-weight: 800;
+    color: #242845;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #004a99;
+    padding-bottom: 10px;
+    line-height: 1.1;
 }
+
 .career-desc {
-  font-size: 18px;
-  line-height: 1.7;
-  color: #444;
-  margin-bottom: 12px;
+    font-size: 19px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 20px;
 }
+
+.career-link {
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 15px;
+}
+
 .career-btn {
-  background: lightblue;
-  padding: 14px 35px;
-  color: #272845;
-  border-radius: 8px;
-  font-size: 20px;
-  cursor: pointer;
-  border: none;
-  margin-top: 20px;
-  transition: 0.3s;
-  font-weight: bold;
-}
-.career-btn:hover { background: #ca6730; }
-
-/* ================================
-   JOB LIST SECTION
-==================================*/
-.job-section {
-  padding: 60px 9%;
-  background: #fff;
-}
-.job-location-title {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 25px;
-  color: #242845;
-}
-.job-flex { display: flex; gap: 45px; }
-.job-left { flex: 1; }
-.job-right {
-  flex: 1.6;
-  background: #f7f8fa;
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid #e1e1e1;
-  min-height: 260px;
-}
-.job-card {
-  background: #242845;
-  padding: 18px 25px;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 17px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.job-card:hover { background: #1c2038; }
-.plus-icon { font-size: 22px; font-weight: bold; }
-.select-text { font-size: 17px; color: #666; text-align: center; }
-
-/* ================================
-   POPUPS
-==================================*/
-.success-popup,
-.job-alert-popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(36,40,69,0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-.success-box,
-.job-alert-box {
-  background: #fff;
-  padding: 30px;
-  border-radius: 14px;
-  text-align: center;
-  width: 90%;
-  max-width: 470px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  animation: popIn 0.3s ease-out;
-}
-.success-box h3 {
-  color: #004a99;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-.success-box p,
-.job-alert-box p {
-  font-size: 17px;
-  color: #242845;
-}
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  font-size: 26px;
-  color: #272845;
-  cursor: pointer;
-  font-weight: bold;
-}
-.close-btn:hover { color: #004a99; }
-@keyframes popIn {
-  from { transform: scale(0.75); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* ================================
-   CAREER RULES
-==================================*/
-.career-rules {
-  margin-top: 30px;
-  background: #f7f9fc;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-.career-rules h3 {
-  font-size: 22px;
-  font-weight: 700;
-  color: #242845;
-  margin-bottom: 12px;
-}
-.career-rules ul {
-  margin: 0 0 20px 20px;
-  padding: 0;
-  color: #444;
-  font-size: 16px;
-  line-height: 1.6;
-}
-.career-rules li { margin-bottom: 8px; }
-
-/* ================================
-   RESPONSIVE
-==================================*/
-@media (max-width: 900px) {
-  .career-hero {
-    flex-direction: column;
+    padding: 20px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    margin-top: 0px;
+    transition: 0.3s ease;
+    font-weight: 700;
     text-align: center;
-    padding: 50px 20px;
-  }
-  .career-hero-img { max-width: 330px; }
-  .career-hero-right { margin-top: 25px; }
-  .job-flex { flex-direction: column; }
+    line-height: 1.2;
+    min-width: 200px;
+
+}
+
+/* Primary Call to Action Button */
+.primary-cta {
+    /* Base Styles */
+    background: #242845;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 25px;
+    /* Good padding */
+    border-radius: 8px;
+    /* Slightly rounded */
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    /* If it's an anchor tag */
+    display: inline-block;
+    overflow: hidden;
+    /* Crucial for the slide-in animation */
+
+    /* Enhanced Shadow */
+    box-shadow: 0 6px 15px rgba(36, 40, 69, 0.4);
+    /* Deeper shadow using the primary color */
+    margin-top: 10px;
+
+    /* Transition Setup */
+    transition: all 0.3s ease-out;
+    /* Smooth transitions for hover effects */
+    position: relative;
+    /* Needed for the pseudo-element overlay */
+    z-index: 1;
+}
+
+/* --- Eye-Catching Linear Motion Animation (Slide-In Hover) --- */
+
+.primary-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Bright secondary color for the "slide" effect (e.g., a vibrant blue/cyan) */
+    background: linear-gradient(90deg, #3f87a6, #242845);
+    opacity: 0;
+    z-index: -1;
+    /* Initial state: The overlay is completely to the left, ready to slide in */
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-out;
+    /* Linear movement */
+}
+
+.primary-cta:hover::before {
+    /* Final state: Slides into view */
+    transform: translateX(0);
+    opacity: 1;
+    /* Make it visible */
+}
+
+/* --- Subtle Movement and Shadow Shift on Hover --- */
+
+.primary-cta:hover {
+    color: #ca6730;
+    /* Keep text white */
+    /* Lift the button slightly */
+    transform: translateY(-2px);
+    /* Enhance the shadow for a lifted look, using a brighter secondary color */
+    box-shadow: 0 8px 20px rgba(63, 135, 166, 0.6);
+}
+
+/* --- Satisfying "Press" Effect on Click (Active State) --- */
+
+.primary-cta:active {
+    /* Push the button down */
+    transform: translateY(1px);
+    /* Flatten the shadow */
+    box-shadow: 0 2px 5px rgba(36, 40, 69, 0.5);
+    /* Ensure the slide-in is hidden when pressed */
+    transition: all 0.1s ease-in;
+}
+
+
+
+
+
+
+/* ================================
+/*
+==================================
+CAREER RULES (KEY REQUIREMENTS) - Enhanced with Animation
+==================================
+*/
+.career-rules {
+    height: 38vh;
+    margin-top: 20px;
+
+    background: #ffffff;
+    /* White background for contrast */
+    padding: 20px;
+    /* Increased overall padding for more space */
+    border-radius: 12px;
+    border: 1px solid #dcdcdc;
+    /* Lighter border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Slightly more prominent shadow */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* Add transition for animation */
+}
+
+/* Animation on hover */
+.career-rules:hover {
+    transform: translateY(-5px);
+    /* Lift the box slightly on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    /* Increase shadow depth on hover */
+}
+
+.career-rules h3 {
+    font-size: 26px;
+    /* Slightly larger heading */
+    font-weight: 700;
+    color: #242845;
+    margin-bottom: 25px;
+    /* Increased bottom margin for better separation */
+    border-bottom: 2px solid #f0f0f0;
+    /* Thicker and lighter separator */
+    padding-bottom: 15px;
+    /* Increased bottom padding for the title */
+    letter-spacing: 0.5px;
+    /* Slight letter spacing for readability */
+}
+
+.career-rules ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.career-rules li {
+    margin-bottom: 18px;
+    /* Increased vertical space between list items */
+    color: #333333;
+    /* Darker text for better contrast */
+    font-size: 18px;
+    /* Slightly larger font size */
+    line-height: 1.6;
+    /* Improved line height for readability */
+    padding-left: 0;
+    /* Remove padding-left here, use a custom bullet for indentation */
+    position: relative;
+}
+
+/* Custom bullet point with a subtle visual */
+.career-rules li::before {
+    content: '⭐';
+    /* Use an emoji or a character for a custom bullet */
+    color: #5a73d3;
+    /* A contrasting color for the bullet */
+    font-size: 14px;
+    position: absolute;
+    left: -25px;
+    /* Position the bullet to the left */
+    top: 5px;
+}
+
+/* Add padding to the ul to make space for the custom bullets */
+.career-rules ul {
+    padding-left: 25px;
+}
+
+
+/* ================================
+    APPLICATION FORM STYLES
+==================================*/
+
+/*
+==================================
+APPLICATION BACKGROUND CONTAINER
+==================================
+*/
+.application-bg-container {
+    /* 1. Positioning and Sizing */
+    width: 100%;
+    min-height: 100vh;
+    /* Ensures the container covers the full viewport height */
+    position: relative;
+    /* Needed if you layer anything inside using absolute positioning */
+
+    /* 2. Background Image Settings */
+    background-size: cover;
+    /* Ensures the image covers the entire container */
+    background-position: center center;
+    /* Centers the image */
+    background-repeat: no-repeat;
+    /* Prevents tiling */
+    background-attachment: fixed;
+    /* Optional: Creates a parallax effect on scroll */
+
+    /* 3. Layout for Centering Content */
+    display: flex;
+    /* Enables flexbox for centering */
+    flex-direction: column;
+    /* Stacks children vertically */
+    align-items: center;
+    /* Horizontally centers the children (e.g., the application-content-wrapper) */
+
+    /* 4. Padding/Margins */
+    /* Add vertical padding to ensure content isn't flush with the top/bottom edges */
+    padding: 30px 0;
+    color: #242845;
+    line-height: 2.7;
+}
+
+/* Optional: Overlay to darken the structural background image 
+   and match the visual style shown in your screenshots. */
+.application-bg-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dark semi-transparent overlay */
+    background-color: rgba(191, 196, 199, 0.87);
+    z-index: 1;
+    /* Keep the overlay behind the application-content-wrapper */
+}
+
+/* Ensure the application content wrapper sits above the overlay */
+.application-content-wrapper {
+    /* ... (Your previous styles) ... */
+    position: relative;
+    z-index: 2;
+}
+
+/* 2. Main Form Layout - Use Grid for Better Alignment */
+.application-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* 3. Make specific fields span the full width (2 columns) */
+.application-form input[name="name"],
+.application-form textarea,
+.file-upload-wrapper,
+.submit-app-btn {
+    grid-column: 1 / -1;
+}
+
+/* 4. Input Styling (Ensure they look uniform) */
+.application-form input,
+.application-form select,
+.application-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #282845;
+    /* Green border for modern look */
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 0;
+    transition: border-color 0.3s;
+}
+
+.application-form textarea {
+    resize: vertical;
+}
+
+/* File Upload Specific Styling */
+.file-upload-wrapper {
+    padding: 15px;
+    border: 1px dashed #FFC107;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.file-upload-wrapper label {
+    display: block;
+    margin-bottom: 10px;
+    color: #FFC107;
+    font-weight: bold;
+}
+
+.file-upload-wrapper input[type="file"] {
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    color: white;
+}
+
+/* Submit Button */
+.submit-app-btn {
+    background: #242845;
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-app-btn:hover {
+    background: #ca6730;
+}
+
+/*
+==================================
+SUCCESS POP-UP STYLES
+==================================
+*/
+
+/* Overlay that covers the whole screen */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dark semi-transparent background to dim the page */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    z-index: 1000;
+    /* Ensure it's on top of everything */
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+/* The actual pop-up box */
+.popup-content {
+    background-color: #28a745;
+    /* Success Green Background */
+    color: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: 90%;
+    width: 350px;
+
+    /* Animation for the box appearing */
+    transform: scale(0.8);
+    animation: zoomIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards 0.1s;
+}
+
+.popup-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.popup-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.popup-close-btn {
+    background: #007bff;
+    /* A nice blue for the button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.popup-close-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.5);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* ================================
+    RESPONSIVE DESIGN 
+==================================*/
+
+/* General Tablet/Small Desktop Adjustments */
+@media (max-width: 992px) {
+
+    /* Hero Section Stacking */
+    .career-hero {
+        flex-direction: column;
+        padding: 60px 5%;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .career-hero-left {
+        order: 2;
+    }
+
+    .career-hero-right {
+        order: 1;
+        width: 100%;
+    }
+
+    .career-hero-img {
+        max-width: 90%;
+        margin-top: 20px;
+    }
+
+    .career-title {
+        font-size: 40px;
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #004a99;
+    }
+
+    .career-desc {
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    /* Button adjustments */
+    .career-link {
+        display: block;
+        margin: 10px auto;
+    }
+
+    .career-btn {
+        width: 90%;
+        min-width: unset;
+        font-size: 16px;
+    }
+
+    /* Key Requirements Box */
+    .career-rules {
+        margin-top: 30px;
+        padding: 20px;
+        text-align: left;
+    }
+
+    .career-rules li {
+        font-size: 16px;
+    }
+}
+/* ================================
+    RESPONSIVE DESIGN 
+==================================*/
+
+/* Mobile Adjustments (768px and below) */
+@media (max-width: 768px) {
+
+    /* Application Form Stacking */
+    .application-content-wrapper {
+        width: 100%;
+        margin: 0;
+        padding: 20px 15px;
+        border-radius: 0;
+    }
+
+    .application-form {
+        grid-template-columns: 1fr;
+        /* Stack all form elements */
+        gap: 15px;
+    }
+
+    /* 🚨 CRITICAL FIX FOR OVERFLOW 🚨 */
+    .application-form input,
+    .application-form select,
+    .application-form textarea {
+        width: 100%; /* Ensure it takes full available space */
+        max-width: 100%; /* Prevents native element rendering from exceeding container */
+        min-width: 0; /* Ensures the element can shrink without causing overflow */
+        padding: 12px;
+        font-size: 0.95rem;
+        /* Force padding and border calculation inside width */
+        box-sizing: border-box; 
+    }
+    
+    .submit-app-btn {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+
+    /* Reset full-column span for mobile grid */
+    .application-form input[name="name"],
+    .application-form textarea,
+    .application-form select, 
+    .file-upload-wrapper,
+    .submit-app-btn {
+        grid-column: auto;
+    }
 }

@@ -16,6 +16,7 @@ import ArchitecturalService from "./pages/ArchitecturalService";
 import MechanicalService from "./pages/MechanicalService";
 import BIMService from "./pages/BimService";
 import PrecastDetailing from "./pages/PrecastDetailing";
+import ApplicationForm from "./components/ApplicatiomForm";
 
 
 
@@ -45,6 +46,7 @@ function App() {
         <Route path="/service" element={<Service />} />
         
         <Route path="/career" element={<Career />} />
+        <Route path="/apply" element={<ApplicationForm />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/drawing" element={<Drawing />} />
         <Route path="/admin" element={<AdminPanel />} />
