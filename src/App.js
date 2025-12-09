@@ -44,6 +44,12 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/company-overview" element={<CompanyOverview />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/rebar-detailing" element={<RebarDetailing/>} />
+        <Route path="/rebar-estimation" element={<RebarEstimation />} />
+        <Route path="/precast-detailing" element={<PrecastDetailing />} />
+        <Route path="/architectural-services" element={<ArchitecturalService />} />
+        <Route path="/mechanical-services" element={<MechanicalService />} />
+        <Route path="/bim-services" element={<BIMService />} />
         
         <Route path="/career" element={<Career />} />
         <Route path="/apply" element={<ApplicationForm />} />

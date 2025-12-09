@@ -15,6 +15,32 @@
   margin-bottom: 28px;
   overflow: hidden;
 }
+.back-button {
+    /* Positioning */
+    position: absolute;
+    top: 25px; /* Adjust vertical position */
+    right: 5%; /* Align to the right edge */
+
+    /* Appearance Overrides (CRITICAL for "no border/background") */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove default padding */
+    cursor: pointer; /* Ensure it looks clickable */
+    font-size: 2em; /* Increase size for better visibility/click area */
+    line-height: 1; /* Keep icon vertically centered */
+    
+    /* Remove previous hover/shadow if they existed */
+    box-shadow: none; 
+    transition: color 0.2s ease;
+    z-index: 10; 
+}
+
+/* Hover effect */
+.back-button:hover {
+    color: #007bff !important; /* Change color on hover (use !important if inline style is strong) */
+    background: none; /* Ensure no background appears on hover */
+}
+
 .rp-hero::before {
   content: "";
   position: absolute;
@@ -265,3 +291,4 @@
     font-size: 15px;
   }
 }
+

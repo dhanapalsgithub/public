@@ -32,7 +32,7 @@ const HomeSlider = () => {
   };
 
   const handleExploreServices = () => {
-    navigate("/service");   // ✅ lowercase path to match your App.jsx route
+    navigate("/drawing");   // ✅ lowercase path to match your App.jsx route
   };
 
   return (

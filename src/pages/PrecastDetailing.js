@@ -2,11 +2,27 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "./ServicePages.css"; // your CSS file
+import { useNavigate } from 'react-router-dom';
 
 const PrecastDetailing = () => {
+  const navigate = useNavigate();
+
+    // Function to handle the back action
+    const handleBack = () => {
+        // Go back one step in the browser history. 
+        // This will take the user back to the previous route (Home, Service, etc.)
+        navigate(-1); 
+    };
   return (
     <>
       <NavBar />
+      <button
+                onClick={handleBack} // Use the function to go back
+                className="back-button" 
+                style={{color:"#272845", fontFamily:'cursive', padding:"10px ",}}
+             >
+                &lt;&lt; Back
+             </button>
       <div className="sp-container">
         <div className="sp-hero sp-hero--precast">
           <div className="sp-hero-content">

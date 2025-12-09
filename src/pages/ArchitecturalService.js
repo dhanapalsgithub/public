@@ -1,14 +1,34 @@
-// ArchitecturalService.jsx
-import React from "react";
+
+
+import { useNavigate } from 'react-router-dom'
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "./ServicePages.css";
 
+
+
 const ArchitecturalService = () => {
+    // 🛑 Initialize the hook
+    const navigate = useNavigate();
+
+    // Function to handle the back action
+    const handleBack = () => {
+        // Go back one step in the browser history. 
+        // This will take the user back to the previous route (Home, Service, etc.)
+        navigate(-1); 
+    };
   return (
     <>
       <NavBar />
+     <button
+                onClick={handleBack} // Use the function to go back
+                className="back-button" 
+                style={{color:"#272845", fontFamily:'cursive', padding:"10px ",}}
+             >
+                &lt;&lt; Back
+             </button>
       <main className="sp-container">
+       
 
         <section className="sp-hero sp-hero--architectural">
           <div className="sp-hero-content">

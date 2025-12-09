@@ -4,6 +4,8 @@
   font-family: "Segoe UI", sans-serif;
 }
 
+
+
 .sp-hero {
   position: relative;
   border-radius: 16px;
@@ -13,7 +15,33 @@
   margin-bottom: 28px;
   overflow: hidden;
 }
+.back-button {
+    /* Positioning */
+    position: absolute;
+    top: 130px; /* Adjust vertical position */
+    right: 2%; /* Align to the right edge */
+    
 
+    /* Appearance Overrides (CRITICAL for "no border/background") */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove default padding */
+    cursor: pointer; /* Ensure it looks clickable */
+    font-size: 0.9em; /* Increase size for better visibility/click area */
+    line-height: 0.8; /* Keep icon vertically centered */
+    
+    
+    /* Remove previous hover/shadow if they existed */
+    box-shadow: none; 
+    transition: color 0.2s ease;
+    z-index: 10; 
+}
+
+/* Hover effect */
+.back-button:hover {
+    color: #ca6730 !important; /* Change color on hover (use !important if inline style is strong) */
+    background: none; /* Ensure no background appears on hover */
+}
 .sp-hero::before {
   content: "";
   position: absolute;
@@ -91,6 +119,8 @@
 .sp-hero--precast {
   background: url("https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg") center/cover no-repeat;
 }
+
+
 
 /* Responsive */
 @media (max-width: 992px) {

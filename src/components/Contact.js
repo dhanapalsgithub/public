@@ -7,7 +7,7 @@ import logo from '../assets/logo101.png';
 // import API from '../api'; // ❌ இனி API.js தேவையில்லை
 
 // 🛑 உங்கள் Google Sheets Web App URL-ஐ இங்கு வரையறுக்கவும்
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxbeWQucO2a5lK7T2YybPtBhnSfpQ9I5F5lhSEyAZrQUIdFR82qYUuk5Zrtt7bmfTUb/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwbym2a3jP6sFbwZLrcC52raAfDbU0tVGorgvlna-s5mwtXODeknUy4IGOKpjiMc8aL/exec";
 
 const Contact = () => {
   const [formData, setFormData] = useState({

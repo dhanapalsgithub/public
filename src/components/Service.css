@@ -1,95 +1,107 @@
+/* src/components/Service.css */
+
+/* --- General Service Section Styling --- */
+
 .service-wrapper {
-  padding: 60px 40px;
-  background-color: #f5f7fb;
-  text-align: center;
-  margin-top: 10px;
+    padding: 60px 5%;
+    background-color: #f8f8f8;
+    text-align: center;
 }
 
 .service-main-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #1b1b1b;
-  margin-top: 10px;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .underline {
-  width: 80px;
-  height: 4px;
-  background: #ca6730;   /* green underline same as screenshot */
-  margin: 0 auto 40px auto;
-  border-radius: 5px;
-  margin-bottom: 10px;
+    width: 80px;
+    height: 3px;
+    background-color: #007bff; /* Primary color for the underline */
+    margin: 0 auto 40px;
 }
 
+/* --- Services Grid Container --- */
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-  padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 300px minimum width */
+    gap: 30px;
+    margin-top: 30px;
 }
 
+/* --- Service Card Styling --- */
 .service-card {
-  text-align: left;
-  max-width: 380px;
-  margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    min-height: 250px; /* Uniform height for better alignment */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Make the entire card clickable and use Link styling */
+.service-card a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .service-icon {
-  font-size: 28px;
-  color: #1b3864; /* navy blue icon */
-  margin-bottom: 10px;
+    font-size: 3em;
+    color: #007bff; /* Icon color */
+    margin-bottom: 15px;
 }
 
 .service-card h3 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1b1b1b;
-  margin-bottom: 8px;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .service-card p {
-  font-size: 15px;
-  line-height: 1.5;
-  color: #333;
+    font-size: 1em;
+    color: #666;
+    flex-grow: 1; /* Pushes content down for uniform look */
 }
-/* Dropdown styling */
+
+/* If you need to differentiate the old structure */
+.service-card-header {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Dropdown Styling (if kept for future use) --- */
 .dropdown-box {
-  margin-top: 10px;
-  background: #f1f1f1;
-  padding: 10px;
-  border-radius: 8px;
-  animation: fadeIn 0.3s ease;
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .dropdown-item {
-  width: 100%;
-  padding: 8px 12px;
-  margin: 5px 0;
-  background: #1b3864;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: left;
-  transition: 0.2s;
+    background: #f1f1f1;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .dropdown-item:hover {
-  background: #ca6730;
+    background: #e0e0e0;
 }
-
-.service-card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-.service-wrapper {
-  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 80px 20px;
-}
-
-
