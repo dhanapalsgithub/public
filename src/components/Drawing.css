@@ -43,7 +43,7 @@
 
 .drawing-img {
   width: 100%;
-  height: 200px;
+  height: 100px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 15px;
@@ -131,4 +131,110 @@
   .drawing-content h2 {
     font-size: 22px;
   }
+}
+/* --- Modal (Lightbox) Styling --- */
+
+/* The full-screen background overlay */
+.modal-overlay {
+    position: relative;
+    top:200;
+    bottom: 10;
+    
+    
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Dark, semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above everything else */
+}
+
+/* The container for the image and description */
+.modal-content {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    max-width: 90vw; /* Take up 90% of the viewport width */
+    max-height: 90vh; /* Take up 90% of the viewport height */
+    overflow-y: auto; /* Enable scrolling if content is too large */
+    position: relative;
+    /* Prevent the overlay click from immediately closing the modal when clicking content */
+    display: flex; 
+    flex-direction: column;
+}
+
+/* Close button */
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 2.5em;
+    color: #333;
+    cursor: pointer;
+    z-index: 1001; /* Above the image/content */
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    color: #ff4d4d;
+}
+
+/* Image container and description layout */
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Expanded Image */
+.modal-img-expanded {
+    max-width: 50%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+}
+
+/* Description text below the image */
+.modal-description {
+    text-align: center;
+    padding: 0 10px 10px 10px;
+}
+
+.modal-description h3 {
+    font-size: 1.8em;
+    color: #007bff;
+    margin-bottom: 5px;
+}
+
+.modal-description p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Make the project cards clickable with a pointer */
+.drawing-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Optional: Adjust for smaller screens */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 10px;
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+
+    .modal-close-btn {
+        font-size: 2em;
+        top: 5px;
+        right: 5px;
+    }
 }

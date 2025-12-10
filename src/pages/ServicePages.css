@@ -16,22 +16,18 @@
   overflow: hidden;
 }
 .back-button {
-    /* Positioning */
+    /* Positioning (Desktop/Default) */
     position: absolute;
-    top: 130px; /* Adjust vertical position */
-    right: 2%; /* Align to the right edge */
+    top: 130px; /* Current desktop/default setting */
+    right: 2%; 
     
-
-    /* Appearance Overrides (CRITICAL for "no border/background") */
-    background: none; /* Remove background */
-    border: none; /* Remove border */
-    padding: 0; /* Remove default padding */
-    cursor: pointer; /* Ensure it looks clickable */
-    font-size: 0.9em; /* Increase size for better visibility/click area */
-    line-height: 0.8; /* Keep icon vertically centered */
-    
-    
-    /* Remove previous hover/shadow if they existed */
+    /* Appearance Overrides */
+    background: none; 
+    border: none; 
+    padding: 0; 
+    cursor: pointer; 
+    font-size: 0.9em; /* Current size */
+    line-height: 0.8; 
     box-shadow: none; 
     transition: color 0.2s ease;
     z-index: 10; 
@@ -39,8 +35,23 @@
 
 /* Hover effect */
 .back-button:hover {
-    color: #ca6730 !important; /* Change color on hover (use !important if inline style is strong) */
-    background: none; /* Ensure no background appears on hover */
+    color: #ca6730 !important; 
+    background: none; 
+}
+
+/* 🛑 MOBILE RESPONSE STYLES (Adjusting for smaller screens) 🛑 */
+/* Targets screens that are 768px wide or less (standard mobile breakpoint) */
+@media (max-width: 768px) {
+    .back-button {
+        /* Adjust positioning for mobile */
+        /* Move it higher up, below the NavBar (assuming NavBar height is ~60-80px) */
+        top: 62px; 
+        right: 5%; /* Increased right padding for better touch clearance */
+        
+        /* Increase size for better touch target */
+        font-size: 0.9em; /* Make the icon significantly larger */
+        line-height: 0.9; /* Reset line height if needed */
+    }
 }
 .sp-hero::before {
   content: "";

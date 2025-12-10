@@ -4,14 +4,39 @@
 
 .service-wrapper {
     padding: 60px 5%;
-    background-color: #f8f8f8;
+    /* Remove background-color: #f8f8f8; to show the image */
     text-align: center;
+
+    /* --- ADDED: Rebar Background Image and Overlay --- */
+    background-image: 
+       linear-gradient(rgba(248, 248, 248, 0.6), rgba(248, 248, 248, 0.6)), /* Overlay is now 60% opaque */ /* Light overlay for text visibility */
+        url('https://cdn.pixabay.com/photo/2018/04/16/11/32/technical-drawing-3324368_640.jpg'); /* REPLACE with your actual image path */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Optional: Creates a parallax effect */
+    position: relative; /* Needed for any absolute child elements */
+
+    /* ADDED: Simple Background Animation Effect (Optional) */
+    animation: background-pan 30s linear infinite; /* Subtle continuous movement */
+}
+
+/* Define the simple background animation */
+@keyframes background-pan {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%; /* Scrolls the background slowly */
+    }
 }
 
 .service-main-title {
     font-size: 2.5em;
     color: #333;
-    margin-bottom: 10px;
+    margin-top: 57px;
+    /* Optional: Ensure text is above any potential background issues */
+    z-index: 2; 
+    position: relative;
 }
 
 .underline {
@@ -24,24 +49,28 @@
 /* --- Services Grid Container --- */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 300px minimum width */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 30px;
     margin-top: 30px;
+    z-index: 2; /* Ensure the grid is above the background */
+    position: relative;
 }
 
 /* --- Service Card Styling --- */
 .service-card {
-    background-color: #fff;
+    background-color: #fff; /* Keep cards white for readability */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
-    min-height: 250px; /* Uniform height for better alignment */
+    min-height: 250px; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
+
+/* ... (Rest of your CSS remains the same) ... */
 
 /* Make the entire card clickable and use Link styling */
 .service-card a {

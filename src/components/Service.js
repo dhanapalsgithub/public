@@ -42,7 +42,7 @@ const Service = () => {
 
                     {/* 1. Rebar Detailing Services (Clickable Card) */}
                     <div className="service-card home-service-card">
-                        <Link to="/rebar-detailing" style={{ textDecoration: "none", color: "inherit" }}>
+                        <Link to="/rebar-detailing" style={{ textDecoration: "none", color: "inherit", }}>
                             <FaTools className="service-icon" />
                             <h3>Rebar Detailing Services</h3>
                             <p>
