@@ -1,0 +1,102 @@
+/* --- CourseOfferingsSection.css --- */
+
+/* --- Variables (For consistency across components) --- */
+:root {
+    --color-primary: #242845; /* Deep Red */
+    --color-secondary: #242845; /* Dark Blue/Black */
+    --color-accent: #FFD700; /* Golden/Yellow */
+    --color-light-gray: #f8f8f8;
+    --color-text-dark: #333;
+    --color-text-light: #666;
+}
+
+/* ---------------------------------- */
+/* 3. CORE COURSE OFFERINGS SECTION */
+/* ---------------------------------- */
+.course-offerings-section {
+    padding: 80px 20px;
+    background-color: var(--color-light-gray); /* Light gray background for contrast */
+}
+
+.section-padding {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.section-subheader {
+    color: #242845; 
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.section-header {
+    font-size: 2.5rem;
+    color: #242845;
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+
+/* Course Card Grid Layout */
+.course-offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px;
+}
+
+/* ---------------------------------- */
+/* CourseCard Component Styles */
+/* ---------------------------------- */
+
+.course-card-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden; /* Ensures image corners are rounded */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.course-card-image {
+    width: 100%;
+    height: 220px; /* Fixed height for consistent look */
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.course-card-item:hover .course-card-image {
+    opacity: 0.9;
+}
+
+.course-card-content {
+    padding: 25px;
+    flex-grow: 1; /* Ensures content fills remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card-content h4 {
+    font-size: 1.5rem;
+    color: #242845;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 10px;
+}
+
+.course-card-content p {
+    color: #242845;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}

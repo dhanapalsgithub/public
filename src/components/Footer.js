@@ -27,7 +27,7 @@ const Footer = () => {
         <Grid item xs={12} md={3}>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
             <img src={logo} alt="R&I Logo" style={{ height: 100, width: 95, marginRight: 12 }} />
-            
+
           </Box>
 
           <Typography variant="body2" sx={{ mb: 2 }}>
@@ -88,7 +88,7 @@ const Footer = () => {
           </Box>
         </Grid>
 
-        {/* Quick Links */} 
+        {/* Quick Links */}
         <Grid item xs={12} md={3}>
           <Typography variant="h6" gutterBottom>
             Quick Links
@@ -116,7 +116,7 @@ const Footer = () => {
 
           <Link to="/service" style={linkStyle}>
             <BuildIcon fontSize="small" style={{ marginRight: 8, color: "#ca6730" }} />
-            Rebar Detailing
+            Rebar Service
           </Link>
         </Grid>
 
@@ -125,11 +125,26 @@ const Footer = () => {
           <Typography variant="h6" gutterBottom>
             Services
           </Typography>
-          <Typography variant="body2">Steel Detailing</Typography>
-          <Typography variant="body2">Formwork Detailing</Typography>
-          <Typography variant="body2">BIM Detailing</Typography>
-          <Typography variant="body2">PreCast Detailing</Typography>
-          <Typography variant="body2">CAD Conversion</Typography>
+          <Link to="/fullstack-course" style={linkStyle}>
+            <BuildIcon fontSize="small" style={{ marginRight: 8, color: "#ca6730" }} />
+            UI/UX services
+          </Link>
+          <Link to="/fullstack-course" style={linkStyle}>
+            <BuildIcon fontSize="small" style={{ marginRight: 8, color: "#ca6730" }} />
+            UI/UX academy
+          </Link>
+          <Link to="/rebar-detailing" style={linkStyle}>
+            <BuildIcon fontSize="small" style={{ marginRight: 8, color: "#ca6730" }} />
+            Rebar Detailing
+          </Link>
+          <Link to="/rebar-estimation" style={linkStyle}>
+            <BuildIcon fontSize="small" style={{ marginRight: 8, color: "#ca6730" }} />
+             RebarEstimation
+          </Link>
+          <Link to="/architectural-services" style={linkStyle}>
+            <BuildIcon fontSize="small" style={{ marginRight: 8, color: "#ca6730" }} />
+            ArchitecturalService
+          </Link>
         </Grid>
 
         {/* Contact Us */}

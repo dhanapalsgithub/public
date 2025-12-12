@@ -114,4 +114,35 @@
     height: 150px;
   }
 }
+/* 1. Blink Animation (for background/text color) */
+@keyframes blink-animation {
+    0%, 100% { 
+        opacity: 1; /* Fully visible */
+    }
+    50% { 
+        opacity: 0.5; /* Half visible (blinking effect) */
+    }
+}
+
+/* 2. Slide-in Animation (move left from right) */
+@keyframes slide-in-from-right {
+    0% {
+        transform: translateX(100%); /* Start 100% to the right */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0); /* End at original position */
+        opacity: 1;
+    }
+}
+
+/* Class to combine the animations */
+.techforge-animated {
+    animation: 
+        slide-in-from-right 0.8s ease-out forwards, /* Slide in over 0.8 seconds */
+        blink-animation 1.5s infinite alternate; /* Blink continuously */
+    /* Ensure the element starts in its initial state before animation */
+    transform: translateX(0); 
+    opacity: 1;
+}
 

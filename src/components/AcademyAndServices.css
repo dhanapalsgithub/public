@@ -1,0 +1,231 @@
+/* --- AcademyAndServices.css --- */
+:root {
+    --color-primary: #d90000; /* Deep Red, similar to images */
+    --color-secondary: #242845; /* Dark Blue/Black */
+    --color-accent: #FFD700; /* Golden/Yellow */
+    --color-text: #444;
+}
+
+/* Keyframe for subtle text entry animation (used in Hero) */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframe for subtle button pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ---------------------------------- */
+/* 1. WELCOME HERO SECTION (image_6298b8.jpg) */
+/* ---------------------------------- */
+.hero-welcome-section {
+    /* Background Image: Use a generic tech/learning image URL */
+    background-image: linear-gradient(rgba(36, 40, 69, 0.7), rgba(36, 40, 69, 0.7)), url('https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_640.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.hero-welcome-section h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    animation: slideInUp 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+}
+
+.hero-welcome-section p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+    animation: slideInUp 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.4s;
+}
+
+.hero-cta-button:hover {
+    animation: pulse 1s infinite;
+}
+
+/* ---------------------------------- */
+/* 2. WHY CHOOSE US Section (image_629515.jpg) */
+/* ---------------------------------- */
+.why-choose-us-grid {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 20px;
+    gap: 40px;
+}
+
+@media (min-width: 768px) {
+    .why-choose-us-grid {
+        flex-direction: row;
+        gap: 80px;
+    }
+}
+
+.wcu-image-container {
+    flex: 1;
+}
+
+.wcu-image-container img {
+    width: 100mvh;
+    margin-top: 20px;
+    height: 550px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.wcu-content {
+    flex: 1.2;
+}
+
+.wcu-feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.wcu-feature-item svg {
+    color: var(--color-primary);
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+/* ---------------------------------- */
+/* 3. ENROLLMENT BENEFITS (image_6297e3.png) */
+/* ---------------------------------- */
+.enrollment-benefits-section {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.benefit-card h4 {
+    margin-top: 10px;
+    color: var(--color-accent);
+}
+
+/* ---------------------------------- */
+/* 4. CONTACT SECTION (image_6294be.png) */
+/* ---------------------------------- */
+.contact-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f8f8f8;
+}
+
+.contact-cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.contact-card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    min-width: 250px;
+    flex: 1;
+    max-width: 350px;
+}
+.contact-card h3 {
+    color: var(--color-primary);
+}
+
+/* ---------------------------------- */
+/* General Section Styling */
+/* ---------------------------------- */
+.h2-divider {
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 10px;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+/* --- Add these styles to your existing AcademyAndServices.css --- */
+
+/* ---------------------------------- */
+/* 3. CORE COURSE OFFERINGS (Reusable Card Styles) */
+/* ---------------------------------- */
+
+.course-offerings-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.course-card-item {
+    width: 100%; /* Default for small screens */
+    max-width: 300px;
+    text-align: left;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+}
+
+.course-card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.course-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 0;
+}
+
+.course-card-content {
+    padding: 15px;
+}
+
+.course-card-content h4 {
+    color: var(--color-primary); /* #D90000 */
+    margin: 5px 0 10px 0;
+    font-size: 1.1rem;
+}
+
+.course-card-content p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .course-card-item {
+        width: calc(33.333% - 20px); /* Adjust width for three columns */
+    }
+}

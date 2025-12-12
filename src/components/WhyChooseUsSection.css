@@ -1,0 +1,134 @@
+/* --- WhyChooseUsSection.css --- */
+
+/* --- Variables (For consistency across components) --- */
+:root {
+    --color-primary: #ca6730; /* Deep Red */
+    --color-secondary: #242845; /* Dark Blue/Black */
+    --color-accent: #FFD700; /* Golden/Yellow */
+    --color-text-light: #666;
+}
+
+/* ---------------------------------- */
+/* 2. WHY CHOOSE US Section */
+/* ---------------------------------- */
+
+.wcu-section-background {
+    /* Full dark overlay background that spans the section */
+    background-image: linear-gradient(rgba(36, 40, 69, 0.9), rgba(36, 40, 69, 0.9)), 
+                      url('https://cdn.pixabay.com/photo/2024/06/22/18/09/ai-generated-8846760_1280.jpg'); /* Placeholder for a dark tech background */
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll; 
+    
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+    position: relative;
+    color: white;
+    margin: 40px auto; /* Add vertical margin for separation */
+    max-width: 100mvh /* Constrain width */
+}
+
+.why-choose-us-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 50px 30px; /* Internal padding */
+}
+
+@media (min-width: 768px) {
+    .why-choose-us-grid {
+        flex-direction: row;
+        gap: 80px;
+        align-items: center; /* Vertically align items */
+    }
+}
+
+.wcu-image-container {
+    flex: 1;
+    z-index: 1;
+}
+
+.wcu-main-image {
+    border-radius: 8px; 
+    width: 100%; 
+    height: 350px; /* Fixed height for image */
+    object-fit: cover;
+    display: block; 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6); 
+    transition: transform 0.3s ease;
+}
+
+.wcu-main-image:hover {
+    transform: scale(1.02);
+}
+
+.wcu-learning-pace-text {
+    margin-top: 15px;
+    color: white;
+    font-weight: bold;
+    border-left: 5px solid var(--color-accent); /* Accent border */
+    padding: 8px 0 8px 15px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.wcu-content {
+    flex: 1.2;
+    z-index: 1;
+}
+
+.wcu-subheader { 
+    color: var(--color-accent); /* Use accent color for subheader */
+    margin: 0; 
+    font-weight: 600;
+}
+.wcu-header { 
+    font-size: 2.2rem; 
+    color: white; 
+    margin-top: 10px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.wcu-feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    color: white;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.wcu-feature-item:hover {
+    background-color: rgba(255, 255, 255, 0.05); /* subtle highlight on hover */
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.wcu-icon {
+    color: var(--color-accent); 
+    font-size: 32px; 
+    margin-right: 20px;
+    min-width: 32px;
+}
+
+.wcu-feature-title { 
+    margin: 0; 
+    color: white; 
+    font-size: 1.2rem;
+}
+
+.wcu-feature-description { 
+    margin: 5px 0 0 0; 
+    font-size: 1rem; 
+    color: #ccc; 
+}
+
+@media (min-width: 768px) {
+    .wcu-main-image {
+        height: 500px;
+    }
+}

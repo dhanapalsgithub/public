@@ -9,10 +9,13 @@ import industrialShed from "../assets/portfolio/indus shed.jpeg";
 import bridgeDeck from "../assets/portfolio/bridge.jpeg";
 import commercialComplex from "../assets/portfolio/commericial.jpeg";
 
+
 const projects = [
   {
     title: "High-Rise Residential Tower",
-    description: "Complete rebar detailing with dia-wise schedules, lap lengths, and bar bending lists for major high-rise structures.",
+    
+    description: "This is the overall process of creating detailed shop drawings (placement plans) that show the exact location, size, shape, and quantity of every reinforcing bar in the structure.",
+    
     image: residentialTower
   },
   {

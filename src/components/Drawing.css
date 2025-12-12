@@ -136,9 +136,9 @@
 
 /* The full-screen background overlay */
 .modal-overlay {
-    position: relative;
-    top:200;
-    bottom: 10;
+    position: fixed;
+    top:0;
+    bottom: 0;
     
     
     left: 0;
@@ -158,8 +158,8 @@
     padding: 50px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    max-width: 90vw; /* Take up 90% of the viewport width */
-    max-height: 90vh; /* Take up 90% of the viewport height */
+    max-width: 80vw; /* Take up 90% of the viewport width */
+    max-height: 65vh; /* Take up 90% of the viewport height */
     overflow-y: auto; /* Enable scrolling if content is too large */
     position: relative;
     /* Prevent the overlay click from immediately closing the modal when clicking content */

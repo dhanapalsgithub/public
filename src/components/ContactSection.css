@@ -1,0 +1,101 @@
+/* --- ContactSection.css --- */
+
+/* --- Variables (For consistency across components) --- */
+:root {
+    --color-primary: #d90000; /* Deep Red */
+    --color-secondary: #242845; /* Dark Blue/Black */
+    --color-accent: #FFD700; /* Golden/Yellow */
+    --color-light-gray: #f8f8f8;
+    --color-text-dark: #333;
+    --color-text-light: #666;
+}
+
+/* ---------------------------------- */
+/* 7. CONTACT SECTION */
+/* ---------------------------------- */
+.contact-section {
+    padding: 80px 20px;
+    background-color: var(--color-secondary); /* Dark background for a serious/professional feel */
+    color: white; /* Light text on dark background */
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.contact-header {
+    font-size: 2.8rem;
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.contact-subheader {
+    font-size: 1.1rem;
+    color: #ccc;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+}
+
+/* Contact Cards Grid */
+.contact-cards-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    /* 1 column on small, 3 columns on large */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Individual Contact Card */
+.contact-card {
+    background:navajowhite;
+    color: var(--color-text-dark); /* Dark text on white card */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-top 0.3s ease;
+    border-top: 5px solid var(--color-accent); /* Golden top border */
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-top-color: var(--color-primary); /* Primary color on hover */
+}
+
+.contact-card-title {
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.contact-card p {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+    margin: 5px 0;
+}
+
+/* Specific styling for the Call/Email links if they become interactive */
+.contact-card p a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-card p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 50px 15px;
+    }
+    .contact-header {
+        font-size: 2.2rem;
+    }
+}
