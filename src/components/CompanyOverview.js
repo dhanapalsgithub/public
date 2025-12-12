@@ -40,7 +40,7 @@ const CompanyOverview = () => {
                 <section className="overview-section image-right-layout">
                     <div className="overview-image-box">
                         <img
-                            src="https://copilot.microsoft.com/th/id/BCO.ad1a7922-0d3a-491b-a732-14f5040bd8be.png"
+                            src="https://cdn.pixabay.com/photo/2024/04/24/07/15/ai-generated-8716821_640.jpg"
                             alt="Mission"
                         />
                     </div>
@@ -58,7 +58,7 @@ const CompanyOverview = () => {
                 <section className="overview-section image-right-layout">
                     <div className="overview-image-box">
                         <img
-                            src="https://copilot.microsoft.com/th/id/BCO.53564487-0b6f-441f-92ff-8883d506cc10.png"
+                            src="https://cdn.pixabay.com/photo/2024/04/24/07/15/ai-generated-8716822_1280.jpg"
                             alt="Vision"
                         />
                     </div>

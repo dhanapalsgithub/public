@@ -125,12 +125,10 @@ const Contact = () => {
           <img src={logo} alt="Logo" className="left-image" />
           <p>
             <strong>R & I Engineering And Technology</strong><br />
-            Kundrathur Main Road, Eswara Nagar, Kovur, Sikakarayapuram,<br />
+            Kundrathur Main Road, Eswara Nagar, Kovur, <br />
             Kancheepuram, Tamil Nadu - 600119
           </p>
-          <p>Email: riengineeringtech@yahoo.com</p>
-          <p>Phone: +91 9790186728</p>
-          <p>Landline: +91 9876543210</p>
+          
           <div className="map-container">
             <iframe
               title="R & I Location"

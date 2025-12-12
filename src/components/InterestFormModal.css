@@ -168,11 +168,11 @@
 }
 .submission-message.success {
     background-color: #d4edda;
-    color: #155724;
+    color: #242845;
 }
 .submission-message.error {
     background-color: #f8d7da;
-    color: #721c24;
+    color: #242845;
 }
 
 /* Responsive Overrides */

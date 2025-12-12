@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";   // ✅ keep imports here
 import "./Home.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CounterBox from "./CounterBox";
+
 
 // Import images
 import slider1 from "../assets/slider1.png";
@@ -60,13 +60,7 @@ const HomeSlider = () => {
           ))}
         </Slider>
 
-        {/* Counter overlay */}
-        <div className="counter-overlay">
-          <CounterBox end={500} duration={2000} label="Happy Clients" />
-          <CounterBox end={1200} duration={2500} label="Projects Delivered" />
-          <CounterBox end={150} duration={2200} label="Skilled Engineers" />
-          <CounterBox end={18} duration={2000} label="Years Experience" />
-        </div>
+       
 
         {/* Services Section */}
         <div className="home-services-container">
