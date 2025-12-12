@@ -128,20 +128,30 @@ body {
    SUBMIT BUTTON
 ============================ */
 .contact-right button {
-  width: 570px;
-  background: #272845;
-  color: #fff;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-  padding: 10px;
+    /* REMOVED: width: 570px; */
+    
+    /* Set button to take full available width, but cap it */
+    width: 100%; 
+    max-width: 250px; /* Adjust this value (e.g., 250px) to control button size on large screens */
+    
+    /* Center the button horizontally */
+    display: block;
+    margin: 20px auto 0 auto; 
+    
+    /* Retained styling */
+    background: #272845;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    /* Removed duplicate padding property */
 }
 
 .contact-right button:hover {
-  background: #ca6730;
+    background: #ca6730;
 }
 
 /* ============================
